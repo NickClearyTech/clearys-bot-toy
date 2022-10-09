@@ -103,7 +103,7 @@ jobs:
 
   publish:
     runs-on: nicleary-ubuntu-k8s
-    needs: [trivy, codeql, semgrep]
+    needs: [trivy, codeql]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -152,7 +152,7 @@ jobs:
 
   cleanup:
     runs-on: nicleary-ubuntu-k8s
-    needs: publish
+    needs: deploy
     steps:
       - name: Delete artifact
         uses: geekyeggo/delete-artifact@v1
