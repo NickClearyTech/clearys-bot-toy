@@ -145,6 +145,7 @@ jobs:
           regex: false
 
       - name: Deploy
+        uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.RANCHER_KUBECONFIG }}
         with:
