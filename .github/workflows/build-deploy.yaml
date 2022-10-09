@@ -52,23 +52,23 @@ jobs:
         with:
           sarif_file: 'trivy-results.sarif'
 
-  semgrep:
-    name: Semgrep
-    runs-on: nicleary-ubuntu-k8s
-    needs: build
-    env:
-      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
-    container:
-      image: returntocorp/semgrep
-    steps:
-      - uses: actions/checkout@v3
-      - run: semgrep ci --sarif --output=semgrep.sarif
-
-      - name: Upload SARIF file for GitHub Advanced Security Dashboard
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: semgrep.sarif
-        if: always()
+#  semgrep:
+#    name: Semgrep
+#    runs-on: nicleary-ubuntu-k8s
+#    needs: build
+#    env:
+#      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+#    container:
+#      image: returntocorp/semgrep
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: semgrep ci --sarif --output=semgrep.sarif
+#
+#      - name: Upload SARIF file for GitHub Advanced Security Dashboard
+#        uses: github/codeql-action/upload-sarif@v2
+#        with:
+#          sarif_file: semgrep.sarif
+#        if: always()
 
   codeql:
     needs: build
