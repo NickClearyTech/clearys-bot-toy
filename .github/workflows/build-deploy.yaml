@@ -140,7 +140,7 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v2
         with:
           find: "@IMAGE_TAG"
-          replace: "{{ github.run_number }}"
+          replace: "${{ github.run_number }}"
           regex: false
 
       - name: Deploy
