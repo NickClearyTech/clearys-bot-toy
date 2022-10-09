@@ -5,7 +5,7 @@ import logging
 
 
 # A bot handler to reply with "THE PROPHET HAS SPOKEN" whenever richard mentions emacs in the emacs channel
-@message_handler(channel=725357726133125223, user=475488656170156039)
+@message_handler(channel=992166504269357146, user=992166504269357146)
 async def prophet_has_spoken(message: Message):
     if "emacs" in message.content.lower():
         await message.reply("*THE PROPHET HAS SPOKEN*")
