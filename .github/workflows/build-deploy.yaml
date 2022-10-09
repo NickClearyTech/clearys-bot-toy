@@ -108,7 +108,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Login to GitHub Container Registry
+      - name: Login to Harbor
         uses: docker/login-action@v2
         with:
           registry: harbor.nicleary.com
@@ -126,7 +126,7 @@ jobs:
       - name: Tag docker image
         run: docker tag harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }} harbor.nicleary.com/library/clearysbottoy:latest
 
-      - name: Push to ghcr
+      - name: Push to harbor
         run: docker push harbor.nicleary.com/library/clearysbottoy:latest && docker push harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }}
 
   deploy:
@@ -148,7 +148,7 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.RANCHER_KUBECONFIG }}
         with:
-          args: apply -f k8s -n clearysbottoy
+          args: apply -f k8s -n clearybottoy
 
   cleanup:
     runs-on: nicleary-ubuntu-k8s
