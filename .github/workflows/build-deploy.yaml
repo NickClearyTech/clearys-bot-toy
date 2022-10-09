@@ -1,0 +1,160 @@
+name: "Main Action"
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    needs: test
+    runs-on: nicleary-ubuntu-k8s
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Docker build
+        run: docker build -t harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }} -f Dockerfile .
+
+      - name: Compress image
+        run: docker save harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }} | gzip > clearysbottoy.tar.gz
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: compressed_image
+          path: clearysbottoy.tar.gz
+
+  trivy:
+    needs: build
+    runs-on: nicleary-ubuntu-k8s
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        name: Download image from artifact
+        with:
+          name: compressed_image
+
+      - name: Load image from artifact
+        run: docker load < clearysbottoy.tar.gz
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }}'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          ignore-unfixed: true
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  semgrep:
+    name: Semgrep
+    runs-on: nicleary-ubuntu-k8s
+    needs: build
+    env:
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+    container:
+      image: returntocorp/semgrep
+    steps:
+      - uses: actions/checkout@v3
+      - run: semgrep ci --sarif --output=semgrep.sarif
+
+      - name: Upload SARIF file for GitHub Advanced Security Dashboard
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: semgrep.sarif
+        if: always()
+
+  codeql:
+    needs: build
+    name: Analyze
+    runs-on: nicleary-ubuntu-k8s
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'python' ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Initializes the CodeQL tools for scanning.
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ${{ matrix.language }}
+        queries: security-and-quality
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+
+  publish:
+    runs-on: nicleary-ubuntu-k8s
+    needs: [trivy, codeql, semgrep]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: harbor.nicleary.com
+          username: ${{ secrets.HARBOR_USERNAME }}
+          password: ${{ secrets.HARBOR_PASSWORD }}
+
+      - uses: actions/download-artifact@v3
+        name: Download image from artifact
+        with:
+          name: compressed_image
+
+      - name: Load image from artifact
+        run: docker load < clearysbottoy.tar.gz
+
+      - name: Tag docker image
+        run: docker tag harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }} harbor.nicleary.com/library/clearysbottoy:latest
+
+      - name: Push to ghcr
+        run: docker push harbor.nicleary.com/library/clearysbottoy:latest && docker push harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }}
+
+  deploy:
+    runs-on: nicleary-ubuntu-k8s
+    needs: publish
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "@IMAGE_TAG"
+          replace: "{{ github.run_number }}"
+          regex: false
+
+      - name: Deploy
+        env:
+          KUBE_CONFIG: ${{ secrets.RANCHER_KUBECONFIG }}
+        with:
+          args: apply -f k8s -n clearysbottoy
+
+  cleanup:
+    runs-on: nicleary-ubuntu-k8s
+    needs: publish
+    steps:
+      - name: Delete artifact
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: compressed_image
