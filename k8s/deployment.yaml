@@ -22,7 +22,7 @@ spec:
         app: clearybottoy
     spec:
       containers:
-        - image: harbor.nicleary.com/library/clearysbottoy:10
+        - image: harbor.nicleary.com/library/clearysbottoy:@IMAGE_TAG
           imagePullPolicy: Always
           command: ['bash', '-c', 'python main.py']
           name: "clearys-bot-toy"
