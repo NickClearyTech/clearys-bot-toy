@@ -2,12 +2,15 @@ import sys
 
 import discord
 from bot import ClearyBot
+from message_handlers import load, __handlers__
 from utils.utils import get_token
 
 import logging
 handler = logging.StreamHandler(sys.stdout)
 
 if __name__ == "__main__":
+    load()
+    print(__handlers__)
     intents = discord.Intents.default()
     intents.message_content = True
 

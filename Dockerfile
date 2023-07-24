@@ -1,4 +1,4 @@
-FROM harbor.nicleary.com/dockerhub/library/python:3.10.2-slim-buster
+FROM harbor.nicleary.com/dockerhub/library/python:3.11
 
 WORKDIR /cbt
 
