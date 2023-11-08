@@ -1,6 +1,7 @@
 from message_handlers import message_handler
 from discord.message import Message
 from message_handlers import handler
+import logging
 
 
 # A bot handler to reply with "THE PROPHET HAS SPOKEN" whenever richard mentions emacs in the emacs channel
@@ -10,6 +11,7 @@ async def prophet_has_spoken(message: Message):
         await message.reply("*THE PROPHET HAS SPOKEN*")
 
 
-@handler(name="Hello there")
-def test_handler():
-    print("hi")
+@handler(name="Hello there", channels=[725357726133125223])
+async def test_handler(message: Message):
+    logging.warning("WOW HELLLO THERE")
+    logging.warning(message.content)
