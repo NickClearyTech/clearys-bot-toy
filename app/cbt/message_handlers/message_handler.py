@@ -19,5 +19,7 @@ def message_handler(channel=None, server=None, user=None):
             if server is not None and message.guild.id != server:
                 return None
             return await func(*args, **kwargs)
+
         return run_checks
+
     return decorator_checker

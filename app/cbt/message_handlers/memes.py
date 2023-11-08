@@ -1,6 +1,6 @@
 from message_handlers import message_handler
 from discord.message import Message
-import functools
+from message_handlers import handler
 import logging
 
 
@@ -9,3 +9,9 @@ import logging
 async def prophet_has_spoken(message: Message):
     if "emacs" in message.content.lower():
         await message.reply("*THE PROPHET HAS SPOKEN*")
+
+
+@handler(name="Hello there", channels=[725357726133125223])
+async def test_handler(message: Message):
+    logging.warning("WOW HELLLO THERE")
+    logging.warning(message.content)
