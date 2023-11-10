@@ -7,13 +7,14 @@ import sys
 
 class ClearyBot(Client):
     async def on_ready(self):
-        logging.info(f"Logged on as {self.user}!")
+        logging.warning(f"Logged on as {self.user}!")
         load()
 
+    # For each message, iterate through the handlers and run them
     async def on_message(self, message):
         logging.warning(f"Message from {message.author}: {message.content}")
+        # Retrieve the individual handlers,imports them, and the decorator handles whether or not the actual functions run
         for name, module, func_name in __handlers__:
-            thing = getattr(sys.modules[module], func_name)
-            await thing(message)
-            logging.warning(module)
+            handler = getattr(sys.modules[module], func_name)
+            await handler(message)
         await prophet_has_spoken(message)
