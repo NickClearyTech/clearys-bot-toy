@@ -13,16 +13,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Login to Harbor
+        uses: docker/login-action@v2
+        with:
+          registry: harbor.nicleary.com
+          username: ${{ secrets.HARBOR_USERNAME }}
+          password: ${{ secrets.HARBOR_PASSWORD }}
+
       - name: Docker build
         run: docker build -t harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }} -f Dockerfile .
 
-      - name: Compress image
-        run: docker save harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }} | gzip > clearysbottoy.tar.gz
+      - name: Tag docker image
+        run: docker tag harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }} harbor.nicleary.com/library/clearysbottoy:latest
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: compressed_image
-          path: clearysbottoy.tar.gz
+      - name: Push to harbor
+        run: docker push harbor.nicleary.com/library/clearysbottoy:latest && docker push harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }}
 
   trivy:
     needs: build
@@ -31,13 +36,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - uses: actions/download-artifact@v3
-        name: Download image from artifact
-        with:
-          name: compressed_image
-
-      - name: Load image from artifact
-        run: docker load < clearysbottoy.tar.gz
+      - name: Docker pull
+        run: docker pull harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }}
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
@@ -101,34 +101,6 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
 
-  publish:
-    runs-on: nicleary-ubuntu-k8s
-    needs: [trivy, codeql]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Login to Harbor
-        uses: docker/login-action@v2
-        with:
-          registry: harbor.nicleary.com
-          username: ${{ secrets.HARBOR_USERNAME }}
-          password: ${{ secrets.HARBOR_PASSWORD }}
-
-      - uses: actions/download-artifact@v3
-        name: Download image from artifact
-        with:
-          name: compressed_image
-
-      - name: Load image from artifact
-        run: docker load < clearysbottoy.tar.gz
-
-      - name: Tag docker image
-        run: docker tag harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }} harbor.nicleary.com/library/clearysbottoy:latest
-
-      - name: Push to harbor
-        run: docker push harbor.nicleary.com/library/clearysbottoy:latest && docker push harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }}
-
   deploy:
     runs-on: nicleary-ubuntu-k8s
     needs: publish
@@ -149,12 +121,3 @@ jobs:
           KUBE_CONFIG: ${{ secrets.RANCHER_KUBECONFIG }}
         with:
           args: apply -f k8s -n clearybottoy
-
-  cleanup:
-    runs-on: nicleary-ubuntu-k8s
-    needs: deploy
-    steps:
-      - name: Delete artifact
-        uses: geekyeggo/delete-artifact@v1
-        with:
-          name: compressed_image
