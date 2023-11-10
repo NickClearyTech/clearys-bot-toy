@@ -103,7 +103,9 @@ jobs:
 
   deploy:
     runs-on: nicleary-ubuntu-k8s
-    needs: publish
+    needs:
+      - codeql
+      - trivy
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
