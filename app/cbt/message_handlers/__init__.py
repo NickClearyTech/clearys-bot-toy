@@ -25,7 +25,6 @@ def handler(
             if len(args) == 0:
                 return None
             message: Message = args[0]
-            logging.warning("RUNNING THING")
             if not isinstance(message, Message):
                 return None
             if channels is not None and message.channel.id not in channels:
