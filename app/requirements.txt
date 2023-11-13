@@ -1,1 +1,2 @@
 discord.py==2.3.2
+cowsay==6.1

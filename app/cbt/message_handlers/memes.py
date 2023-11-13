@@ -1,9 +1,6 @@
 import random
-
-from message_handlers import message_handler
 from discord.message import Message
 from message_handlers import handler
-import logging
 
 emacs_quotes_options = [
     "eMaCS Is THe BEsT tExt edIToR",
@@ -17,7 +14,7 @@ emacs_quotes_options = [
 
 # A bot handler to reply with "THE PROPHET HAS SPOKEN" whenever richard mentions emacs in the emacs channel
 @handler(
-    name="prophet has spoken", channels=[992166504269357146], users=[192024972644974592]
+    name="Prophet has spoken", channels=[992166504269357146], users=[192024972644974592]
 )
 async def prophet_has_spoken(message: Message):
     if "emacs" in message.content.lower():

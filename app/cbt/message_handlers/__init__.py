@@ -8,8 +8,6 @@ from typing import Callable, List
 from attr.converters import optional
 from discord import Message
 
-from .message_handler import message_handler
-
 __handlers__ = []
 
 

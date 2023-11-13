@@ -2,8 +2,8 @@ import sys
 
 import discord
 from bot import ClearyBot
-from message_handlers import load, __handlers__
 from utils.utils import get_token
+from commands.cowsay import cowsay
 
 import logging
 
@@ -13,5 +13,10 @@ if __name__ == "__main__":
     intents = discord.Intents.default()
     intents.message_content = True
 
-    client = ClearyBot(intents=intents)
-    client.run(get_token(), log_handler=handler, log_level=logging.INFO)
+    bot = ClearyBot(command_prefix="/", intents=intents)
+
+    # Register commands
+    # theres probably a way to do this dynamically but idgaf
+    bot.add_command(cowsay)
+
+    bot.run(get_token(), log_handler=handler, log_level=logging.INFO)
