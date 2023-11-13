@@ -4,6 +4,7 @@ import discord
 from bot import ClearyBot
 from utils.utils import get_token
 from commands.cowsay import cowsay
+from commands.uwuify import uwuify_text
 
 import logging
 
@@ -18,5 +19,6 @@ if __name__ == "__main__":
     # Register commands
     # theres probably a way to do this dynamically but idgaf
     bot.add_command(cowsay)
+    bot.add_command(uwuify_text)
 
     bot.run(get_token(), log_handler=handler, log_level=logging.INFO)
