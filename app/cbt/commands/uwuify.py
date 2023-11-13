@@ -44,3 +44,9 @@ async def uwuify_text(ctx: Context, *args) -> None:
     result = uwuify.uwu(text, flags=flags)
     await ctx.send(result)
 
+
+@uwuify_text.error
+async def uwuify_text_error(ctx, error):
+    logging.error(error)
+    await ctx.send(
+        f"An unknown error has occured! Man, you suck. But nick sucks more. Tell him he's a dumbass! Your error is: {error}. How did you manage that, you fuck?")

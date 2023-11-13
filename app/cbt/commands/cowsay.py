@@ -30,4 +30,4 @@ async def cowsay(ctx: Context, *args):
 @cowsay.error
 async def cowsay_error(ctx, error):
     logging.error(error)
-    await ctx.send(f"An uknown error has occured! Ping nick and tell him he's a dipshit! Because you're all intelligent: here's the error: {error}")
+    await ctx.send(f"An unknown error has occured! Ping nick and tell him he's a dipshit! Because you're all intelligent: here's the error: {error}")
