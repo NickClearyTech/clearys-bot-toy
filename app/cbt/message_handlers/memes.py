@@ -10,7 +10,8 @@ emacs_quotes_options = [
     emacs.emacs_concat_all_the_strings(["emacs?", "Is", "that", "like", "an", "off", "brand", "iMac?"], sep=" "),
     emacs.emacs_concat_all_the_strings(["*spends", "80", "hours", "a", "week", "configuring", "text", "editor*"], sep=" "),
     emacs.emacs_concat_all_the_strings(["Dror", "ragzlin...", "dror", "ragzlin...", "had", "a", "warrior's", "heart.", "And", "a", "killer", "emacs", "config."], sep=" "),
-    emacs.emacs_concat_all_the_strings(["Richard,", "have", "you", "reminded", "Nick", "to", "try", "out", "Neovim", "today?", "If", "not,", "you", "should.", "If", "you", "have,", "you", "should", "again.", "Just", "to", "be", "sure."], sep=" ")
+    emacs.emacs_concat_all_the_strings(["Richard,", "have", "you", "reminded", "Nick", "to", "try", "out", "Neovim", "today?", "If", "not,", "you", "should.", "If", "you", "have,", "you", "should", "again.", "Just", "to", "be", "sure."], sep=" "),
+    emacs.emacs_concat_string("Using the power of Emacs, you can add arbitrary code execution features to any repo! This meme was generated on: \" (current-time-string)", "\"")
 ]
 
 guix_quotes_option = [
