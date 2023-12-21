@@ -5,7 +5,7 @@ WORKDIR /cbt
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONBUFFERED=1
 
-# create an unprivileged user
+# create an unprivledged user
 RUN adduser --disabled-password --gecos '' app
 
 RUN apt update && apt upgrade -y
