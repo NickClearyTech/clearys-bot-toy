@@ -37,6 +37,7 @@ devops_quotes_options = [
     "Something something devops engineers shoudln't be a job, it's a culture thing",
     "GitLab Actions are better than Jenkins pipelines anyway",
     "DevOps? Those guys just complicate everything",
+    "Have you heard of our lord and savior docker + k8s? Please let me tell you about docker. Please please please please please!!! I LOVE DEVOPS AND K8S AND DOCKER"
 ]
 
 
