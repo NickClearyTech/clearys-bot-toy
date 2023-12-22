@@ -1,5 +1,4 @@
 from discord.ext.commands import Bot
-from message_handlers.memes import prophet_has_spoken
 import logging
 from message_handlers import load, __handlers__
 import sys

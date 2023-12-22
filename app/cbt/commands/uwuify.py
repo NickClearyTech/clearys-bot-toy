@@ -1,6 +1,5 @@
 import logging
 import argparse
-from typing import Optional
 
 import uwuify
 
