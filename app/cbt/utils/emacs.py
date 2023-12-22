@@ -7,7 +7,7 @@ import typing
 # can somehow escape the quotes and run arbitrary code.
 def emacs_concat_string(str1: str, str2: str, sep: str=""):
     # princ prints to stdout without separators (aka quotes)
-    command = f"emacs --batch --eval '(princ (concat \"{str1}\" \"{sep}\" \"{str2}\"))'"
+    command = f"emacs --batch --no-site-file --eval '(princ (concat \"{str1}\" \"{sep}\" \"{str2}\"))'"
     return subprocess.check_output(command, text=True, shell=True, stderr=subprocess.STDOUT).strip()
 
 def emacs_concat_all_the_strings(strings: typing.List[str], sep: str=""):

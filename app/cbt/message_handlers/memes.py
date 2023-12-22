@@ -4,13 +4,20 @@ from message_handlers import handler
 from utils import emacs
 
 emacs_quotes_options = [
+    # Due to limitations with Emacs string concatenation in the manner
+    # we're invoking it, "" and apostrophe characters cannot be
+    # embedded in strings.
     emacs.emacs_concat_all_the_strings(["eMaCS", "Is", "THe", "BEsT", "tExt", "edIToR"], sep=" "),
     emacs.emacs_concat_all_the_strings(["Have", "you", "considered", "trying", "nvim?"], sep=" "),
-    emacs.emacs_concat_all_the_strings(["FYI:", "package", "update", "1.69", "is", "now", "available", "for", "Deldo.", "Resolves", "numerous", "bugs", "with", "the", "Thurstmaster", "series'", "integration"], sep=" "),
+    emacs.emacs_concat_all_the_strings(["FYI:", "package", "update", "1.69", "is", "now", "available", "for", "Deldo.",
+                                        "Resolves", "numerous", "bugs", "with", "the", "Thurstmaster", "series", "integration"], sep=" "),
     emacs.emacs_concat_all_the_strings(["emacs?", "Is", "that", "like", "an", "off", "brand", "iMac?"], sep=" "),
     emacs.emacs_concat_all_the_strings(["*spends", "80", "hours", "a", "week", "configuring", "text", "editor*"], sep=" "),
-    emacs.emacs_concat_all_the_strings(["Dror", "ragzlin...", "dror", "ragzlin...", "had", "a", "warrior's", "heart.", "And", "a", "killer", "emacs", "config."], sep=" "),
-    emacs.emacs_concat_all_the_strings(["Richard,", "have", "you", "reminded", "Nick", "to", "try", "out", "Neovim", "today?", "If", "not,", "you", "should.", "If", "you", "have,", "you", "should", "again.", "Just", "to", "be", "sure."], sep=" "),
+    emacs.emacs_concat_all_the_strings(["Dror", "ragzlin...", "dror", "ragzlin...", "had", "a", "warriors", "heart.", "And", "a", "killer", "emacs", "config."], sep=" "),
+    emacs.emacs_concat_all_the_strings(["Richard,", "have", "you", "reminded", "Nick", "to", "try", "out", "Neovim", "today?",
+                                        "If", "not,", "you", "should.",
+                                        "If", "you", "have,", "you", "should", "again.",
+                                        "Just", "to", "be", "sure."], sep=" "),
     emacs.emacs_concat_string("Using the power of Emacs, you can add arbitrary code execution features to any repo! This meme was generated on: \" (current-time-string)", "\"")
 ]
 
