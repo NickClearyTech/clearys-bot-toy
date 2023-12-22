@@ -18,6 +18,7 @@ emacs_quotes_options = [
                                         "If", "not,", "you", "should.",
                                         "If", "you", "have,", "you", "should", "again.",
                                         "Just", "to", "be", "sure."], sep=" "),
+    emacs.emacs_concat_all_the_strings(["I", "wonder:", "was", "guix", "written", "in", "emacs?" "Is", "this", "a", "crossover", "episode"], sep=" "),
     emacs.emacs_concat_string("Using the power of Emacs, you can add arbitrary code execution features to any repo! This meme was generated on: \" (current-time-string)", "\"")
 ]
 
@@ -27,7 +28,15 @@ guix_quotes_option = [
     "What does Guix even stand for anyway? Greater Ulysses Is Xenophobic?",
     "Real men use Gentoo. Just saying.",
     "guix package -i happiness\nFuck that didn't work.",
-    "I packaged Windows XP as a guix package. Because I can. Some men just want to watch the world burn."
+    "I packaged Windows XP as a guix package. Because I can. Some men just want to watch the world burn.",
+    "guix is not only a package system. It is a way of life. One does not simply package their code with guix. They embody a bit of guix in their soul. You become a guix geek."
+]
+
+devops_quotes_options = [
+    "DevOps engineers are equal opportunity haters. They hate both developers for being fucking dumbasses, and operations guys for being moronic dumbos",
+    "Something something devops engineers shoudln't be a job, it's a culture thing",
+    "GitLab Actions are better than Jenkins pipelines anyway",
+    "DevOps? Those guys just complicate everything",
 ]
 
 
@@ -50,3 +59,13 @@ async def emacs_quotes(message: Message):
 async def guix_quotes(message: Message):
     if "guix" in message.content.lower() and random.randint(1, 10) > 3:
         await message.reply(random.choice(guix_quotes_option))
+
+@handler(name="DevOps")
+async def devops_quotes(message: Message):
+    if "devops" in message.content.lower() and random.randint(1, 10) > 3:
+        await message.reply(random.choice(devops_quotes_options))
+
+@handler(name="jenkins")
+async def jenkins_triggers_nick(message: Message):
+    if "jenkins" in message.content.lower():
+        await message.reply(f"Hey <@{str(475488656170156039)}> Get this! This guys LIKES Jenkins!")
