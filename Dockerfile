@@ -9,7 +9,7 @@ ENV PYTHONBUFFERED=1
 RUN adduser --disabled-password --gecos '' app
 
 RUN apt update && apt upgrade -y
-RUN apt install libffi-dev libnacl-dev python3-dev -y
+RUN apt install libffi-dev libnacl-dev python3-dev emacs -y
 
 COPY app/requirements.txt .
 RUN pip3 install --upgrade pip && pip3 install --no-cache-dir -r requirements.txt
