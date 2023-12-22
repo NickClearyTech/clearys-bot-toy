@@ -18,7 +18,7 @@ emacs_quotes_options = [
                                         "If", "not,", "you", "should.",
                                         "If", "you", "have,", "you", "should", "again.",
                                         "Just", "to", "be", "sure."], sep=" "),
-    emacs.emacs_concat_all_the_strings(["I", "wonder:", "was", "guix", "written", "in", "emacs?" "Is", "this", "a", "crossover", "episode"], sep=" "),
+    emacs.emacs_concat_all_the_strings(["I", "wonder:", "was", "guix", "written", "in", "emacs?", "Is", "this", "a", "crossover", "episode"], sep=" "),
     emacs.emacs_concat_string("Using the power of Emacs, you can add arbitrary code execution features to any repo! This meme was generated on: \" (current-time-string)", "\"")
 ]
 
