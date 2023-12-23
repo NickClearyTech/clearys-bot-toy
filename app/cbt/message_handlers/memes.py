@@ -7,19 +7,109 @@ emacs_quotes_options = [
     # Due to limitations with Emacs string concatenation in the manner
     # we're invoking it, "" and apostrophe characters cannot be
     # embedded in strings.
-    emacs.emacs_concat_all_the_strings(["eMaCS", "Is", "THe", "BEsT", "tExt", "edIToR"], sep=" "),
-    emacs.emacs_concat_all_the_strings(["Have", "you", "considered", "trying", "nvim?"], sep=" "),
-    emacs.emacs_concat_all_the_strings(["FYI:", "package", "update", "1.69", "is", "now", "available", "for", "Deldo.",
-                                        "Resolves", "numerous", "bugs", "with", "the", "Thurstmaster", "series", "integration"], sep=" "),
-    emacs.emacs_concat_all_the_strings(["emacs?", "Is", "that", "like", "an", "off", "brand", "iMac?"], sep=" "),
-    emacs.emacs_concat_all_the_strings(["*spends", "80", "hours", "a", "week", "configuring", "text", "editor*"], sep=" "),
-    emacs.emacs_concat_all_the_strings(["Dror", "ragzlin...", "dror", "ragzlin...", "had", "a", "warriors", "heart.", "And", "a", "killer", "emacs", "config."], sep=" "),
-    emacs.emacs_concat_all_the_strings(["Richard,", "have", "you", "reminded", "Nick", "to", "try", "out", "Neovim", "today?",
-                                        "If", "not,", "you", "should.",
-                                        "If", "you", "have,", "you", "should", "again.",
-                                        "Just", "to", "be", "sure."], sep=" "),
-    emacs.emacs_concat_all_the_strings(["I", "wonder:", "was", "guix", "written", "in", "emacs?", "Is", "this", "a", "crossover", "episode"], sep=" "),
-    emacs.emacs_concat_string("Using the power of Emacs, you can add arbitrary code execution features to any repo! This meme was generated on: \" (current-time-string)", "\"")
+    emacs.emacs_concat_all_the_strings(
+        ["eMaCS", "Is", "THe", "BEsT", "tExt", "edIToR"], sep=" "
+    ),
+    emacs.emacs_concat_all_the_strings(
+        ["Have", "you", "considered", "trying", "nvim?"], sep=" "
+    ),
+    emacs.emacs_concat_all_the_strings(
+        [
+            "FYI:",
+            "package",
+            "update",
+            "1.69",
+            "is",
+            "now",
+            "available",
+            "for",
+            "Deldo.",
+            "Resolves",
+            "numerous",
+            "bugs",
+            "with",
+            "the",
+            "Thurstmaster",
+            "series",
+            "integration",
+        ],
+        sep=" ",
+    ),
+    emacs.emacs_concat_all_the_strings(
+        ["emacs?", "Is", "that", "like", "an", "off", "brand", "iMac?"], sep=" "
+    ),
+    emacs.emacs_concat_all_the_strings(
+        ["*spends", "80", "hours", "a", "week", "configuring", "text", "editor*"],
+        sep=" ",
+    ),
+    emacs.emacs_concat_all_the_strings(
+        [
+            "Dror",
+            "ragzlin...",
+            "dror",
+            "ragzlin...",
+            "had",
+            "a",
+            "warriors",
+            "heart.",
+            "And",
+            "a",
+            "killer",
+            "emacs",
+            "config.",
+        ],
+        sep=" ",
+    ),
+    emacs.emacs_concat_all_the_strings(
+        [
+            "Richard,",
+            "have",
+            "you",
+            "reminded",
+            "Nick",
+            "to",
+            "try",
+            "out",
+            "Neovim",
+            "today?",
+            "If",
+            "not,",
+            "you",
+            "should.",
+            "If",
+            "you",
+            "have,",
+            "you",
+            "should",
+            "again.",
+            "Just",
+            "to",
+            "be",
+            "sure.",
+        ],
+        sep=" ",
+    ),
+    emacs.emacs_concat_all_the_strings(
+        [
+            "I",
+            "wonder:",
+            "was",
+            "guix",
+            "written",
+            "in",
+            "emacs?",
+            "Is",
+            "this",
+            "a",
+            "crossover",
+            "episode",
+        ],
+        sep=" ",
+    ),
+    emacs.emacs_concat_string(
+        'Using the power of Emacs, you can add arbitrary code execution features to any repo! This meme was generated on: " (current-time-string)',
+        '"',
+    ),
 ]
 
 guix_quotes_option = [
@@ -29,7 +119,7 @@ guix_quotes_option = [
     "Real men use Gentoo. Just saying.",
     "guix package -i happiness\nFuck that didn't work.",
     "I packaged Windows XP as a guix package. Because I can. Some men just want to watch the world burn.",
-    "guix is not only a package system. It is a way of life. One does not simply package their code with guix. They embody a bit of guix in their soul. You become a guix geek."
+    "guix is not only a package system. It is a way of life. One does not simply package their code with guix. They embody a bit of guix in their soul. You become a guix geek.",
 ]
 
 devops_quotes_options = [
@@ -37,7 +127,7 @@ devops_quotes_options = [
     "Something something devops engineers shoudln't be a job, it's a culture thing",
     "GitLab Actions are better than Jenkins pipelines anyway",
     "DevOps? Those guys just complicate everything",
-    "Have you heard of our lord and savior docker + k8s? Please let me tell you about docker. Please please please please please!!! I LOVE DEVOPS AND K8S AND DOCKER"
+    "Have you heard of our lord and savior docker + k8s? Please let me tell you about docker. Please please please please please!!! I LOVE DEVOPS AND K8S AND DOCKER",
 ]
 
 
@@ -61,12 +151,16 @@ async def guix_quotes(message: Message):
     if "guix" in message.content.lower() and random.randint(1, 10) > 3:
         await message.reply(random.choice(guix_quotes_option))
 
+
 @handler(name="DevOps")
 async def devops_quotes(message: Message):
     if "devops" in message.content.lower() and random.randint(1, 10) > 3:
         await message.reply(random.choice(devops_quotes_options))
 
+
 @handler(name="jenkins")
 async def jenkins_triggers_nick(message: Message):
     if "jenkins" in message.content.lower():
-        await message.reply(f"Hey <@{str(475488656170156039)}> Get this! This guys LIKES Jenkins!")
+        await message.reply(
+            f"Hey <@{str(475488656170156039)}> Get this! This guys LIKES Jenkins!"
+        )

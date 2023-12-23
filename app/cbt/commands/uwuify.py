@@ -7,22 +7,11 @@ from discord.ext import commands
 from discord.ext.commands.context import Context
 
 parser = argparse.ArgumentParser()
-parser.add_argument(
-    "text"
-)
-parser.add_argument(
-    "--smiley",
-    action="store_true"
-)
-parser.add_argument(
-    "-y",
-    "--yu",
-    action="store_true"
-)
-parser.add_argument(
-    "--stutter",
-    action="store_true"
-)
+parser.add_argument("text")
+parser.add_argument("--smiley", action="store_true")
+parser.add_argument("-y", "--yu", action="store_true")
+parser.add_argument("--stutter", action="store_true")
+
 
 @commands.command(name="uwuify")
 async def uwuify_text(ctx: Context, *args) -> None:
@@ -48,4 +37,5 @@ async def uwuify_text(ctx: Context, *args) -> None:
 async def uwuify_text_error(ctx, error):
     logging.error(error)
     await ctx.send(
-        f"An unknown error has occured! Man, you suck. But nick sucks more. Tell him he's a dumbass! Your error is: {error}. How did you manage that, you fuck?")
+        f"An unknown error has occured! Man, you suck. But nick sucks more. Tell him he's a dumbass! Your error is: {error}. How did you manage that, you fuck?"
+    )
