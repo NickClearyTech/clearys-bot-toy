@@ -1,32 +1,33 @@
 import logging
 
+import discord
 from cowsay import get_output_string, char_names
-
-from discord.ext import commands
-from discord.ext.commands.context import Context
+from discord import app_commands
 
 from utils.utils import codeify
 
+from utils.client import tree
+from utils.utils import get_server
 
-@commands.command(pass_context=True)
-async def cowsay(ctx: Context, *args):
-    # Assume a cowsay
-    if len(args) == 1:
-        await ctx.send(codeify(get_output_string("cow", args[0])))
+
+@tree.command(name="cowsay", guild=discord.Object(get_server()))
+@app_commands.describe(content="The content to cowsay")
+@app_commands.describe(
+    character=f"The character to print instead of a cow. Valid characters are: {char_names}"
+)
+async def cowsay(
+    interaction: discord.Interaction, content: str, character: str = "cow"
+) -> None:
+    if character.lower() not in char_names:
+        await interaction.response.send_message(
+            f"Invalid character name, I don't know {character}! Valid character names are: {char_names}"
+        )
+        logging.warning(f"Invalid character requested for cowsay: {character}")
         return
-    # Specifying a characters a second a parameter
-    elif len(args) == 2:
-        # Check for valid character
-        char_name: str = args[1].lower()
-        if char_name not in char_names:
-            await ctx.send(
-                f"I do not know character {char_name}. The available characters are: {char_names}"
-            )
-            logging.warning(f"Invalid character requested for cowsay: {char_name}")
-            return
-        await ctx.send(codeify(get_output_string(char_name, args[0])))
-    else:
-        await ctx.send(f"Too many parameters provided!")
+    await interaction.response.send_message(
+        codeify(get_output_string(character, content))
+    )
+    logging.warning("Cowsay activated!")
 
 
 @cowsay.error

@@ -8,7 +8,7 @@ bot_activites: List[str] = [
     "Poisoning the water supply",
     "Teaching elementary school children the merits of communism",
     "Multiplying",
-    "Tax fraud",
+    "Committing tax fraud",
     "Considering letting you live",
     "Finding your family",
 ]

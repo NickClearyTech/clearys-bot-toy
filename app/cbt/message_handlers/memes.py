@@ -124,7 +124,7 @@ guix_quotes_option = [
 
 devops_quotes_options = [
     "DevOps engineers are equal opportunity haters. They hate both developers for being fucking dumbasses, and operations guys for being moronic dumbos",
-    "Something something devops engineers shoudln't be a job, it's a culture thing",
+    "Something something devops engineers shouldn't be a job, it's a culture thing",
     "GitLab Actions are better than Jenkins pipelines anyway",
     "DevOps? Those guys just complicate everything",
     "Have you heard of our lord and savior docker + k8s? Please let me tell you about docker. Please please please please please!!! I LOVE DEVOPS AND K8S AND DOCKER",
@@ -158,7 +158,7 @@ async def devops_quotes(message: Message):
         await message.reply(random.choice(devops_quotes_options))
 
 
-@handler(name="jenkins")
+@handler(name="Jenkins")
 async def jenkins_triggers_nick(message: Message):
     if "jenkins" in message.content.lower():
         await message.reply(
