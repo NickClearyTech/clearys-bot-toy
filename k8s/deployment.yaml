@@ -33,4 +33,4 @@ spec:
                   name: discordtoken
                   key: discord_token
             - name: DISCORD_SERVER
-              value: 790420576468205628
+              value: "790420576468205628"
