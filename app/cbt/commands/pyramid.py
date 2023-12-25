@@ -16,7 +16,7 @@ async def pyramid_user(
     logging.warning("Pyramid requested for user")
     if depth > 12:
         await interaction.response.send_message(
-            "Maximum supported depth is 15! Otherwise wierd formatting bullshit looks ugly. Also it fucks with my rate limit"
+            "Maximum supported depth is 13! Otherwise wierd formatting bullshit looks ugly. Also it fucks with my rate limit"
         )
         return
     if depth < 2:
