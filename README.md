@@ -11,6 +11,8 @@ The Source Code for the Cleary's Bot Toy discord Bot
 - Run `docker compose build`
 - Run `docker compose up`
 
+### Formatting Code
+
 Before pushing, make sure you format your code. We use a formatter called black. To install:
 
 ```shell
@@ -21,4 +23,10 @@ Then, to format from the root of the project, just run:
 
 ```shell
 black .
+```
+
+Those using the GNU Guix package manager can make use of a script to format the program without installing anything to their system. From the project root, run:
+
+```shell
+./bin/format
 ```

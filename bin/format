@@ -1,0 +1,2 @@
+#!/usr/bin/env -S guix shell --container python-black dash -- dash
+black .
