@@ -10,3 +10,15 @@ The Source Code for the Cleary's Bot Toy discord Bot
 - In this .env file, add your discord token and the ID of your test server
 - Run `docker compose build`
 - Run `docker compose up`
+
+Before pushing, make sure you format your code. We use a formatter called black. To install:
+
+```shell
+pip3 install black
+```
+
+Then, to format from the root of the project, just run:
+
+```shell
+black .
+```
