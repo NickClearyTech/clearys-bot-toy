@@ -4,5 +4,5 @@ from discord.message import Message
 
 @handler(name="Good Bot")
 async def handle_good_bot(message: Message):
-    if message.content.lower() == "good bot":
+    if message.content.casefold() == "Good bot".casefold():
         await message.reply("Thanks Daddy. I try.")
