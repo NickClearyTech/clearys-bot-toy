@@ -20,13 +20,10 @@ jobs:
           password: ${{ secrets.HARBOR_PASSWORD }}
 
       - name: Docker build
-        run: docker build -t harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }} -f Dockerfile .
-
-      - name: Tag docker image
-        run: docker tag harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }} harbor.nicleary.com/library/clearysbottoy:latest
+        run: docker build -t harbor.nicleary.com/library/clearysbottoy:pr${{ github.run_number }} -f Dockerfile .
 
       - name: Push to harbor
-        run: docker push harbor.nicleary.com/library/clearysbottoy:latest && docker push harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }}
+        run: docker push harbor.nicleary.com/library/clearysbottoy:pr${{ github.run_number }}
 
   trivy:
     needs: build
@@ -36,12 +33,12 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Docker pull
-        run: docker pull harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }}
+        run: docker pull harbor.nicleary.com/library/clearysbottoy:pr${{ github.run_number }}
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }}'
+          image-ref: 'harbor.nicleary.com/library/clearysbottoy:pr${{ github.run_number }}'
           format: 'sarif'
           output: 'trivy-results.sarif'
           ignore-unfixed: true
