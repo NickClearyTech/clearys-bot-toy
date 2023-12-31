@@ -96,26 +96,3 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
-
-  deploy:
-    runs-on: nicleary-ubuntu-k8s
-    needs:
-      - codeql
-      - trivy
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Find and Replace
-        uses: jacobtomlinson/gha-find-replace@v2
-        with:
-          find: "@IMAGE_TAG"
-          replace: "${{ github.run_number }}"
-          regex: false
-
-      - name: Deploy
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.RANCHER_KUBECONFIG }}
-        with:
-          args: apply -f k8s -n clearybottoy
