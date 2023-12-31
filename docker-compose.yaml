@@ -12,7 +12,7 @@ services:
       - ./app/cbt:/cbt
     command: ["python3", "main.py"]
   discorddata_backend:
-    image: harbor.nicleary.com/library/discord-metrics-server-api:29
+    image: nicklesbread/discord-metrics-server:api-32
     environment:
       MARIA_USER: mysql
       MARIA_PASSWORD: mysql
@@ -25,7 +25,7 @@ services:
       discorddata_atlas_run_migrations:
         condition: service_completed_successfully
   discorddata_atlas_run_migrations:
-    image: harbor.nicleary.com/library/discord-metrics-server-migrations:29
+    image: nicklesbread/discord-metrics-server:migrations-32
     entrypoint:
       - "atlas"
       - "migrate"
