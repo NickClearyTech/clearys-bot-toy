@@ -38,7 +38,7 @@ services:
       discorddata_db:
         condition: service_healthy
   discorddata_db:
-    image: harbor.nicleary.com/dockerhub/mariadb
+    image: mariadb
     restart: always
     environment:
       MARIADB_RANDOM_ROOT_PASSWORD: true
