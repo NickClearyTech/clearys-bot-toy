@@ -1,3 +1,4 @@
+import asyncio
 import sys
 import random
 
@@ -38,6 +39,5 @@ async def on_message(message: discord.Message):
     for _, module, func_name in __handlers__:
         handler = getattr(sys.modules[module], func_name)
         await handler(message)
-
 
 client.run(get_token(), log_handler=handler)

@@ -120,6 +120,7 @@ guix_quotes_option = [
     "guix package -i happiness\nFuck that didn't work.",
     "I packaged Windows XP as a guix package. Because I can. Some men just want to watch the world burn.",
     "guix is not only a package system. It is a way of life. One does not simply package their code with guix. They embody a bit of guix in their soul. You become a guix geek.",
+    "Honestly I don't understand all the hype around Gunoo Gewicks. Like, whats so special about it?"
 ]
 
 devops_quotes_options = [
