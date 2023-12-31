@@ -37,7 +37,7 @@ jobs:
         run: docker tag harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }} nicklesbread/clearys-bot-toy:${{ github.run_number }}
 
       - name: Push to harbor and dockerhub
-        run: docker push harbor.nicleary.com/library/clearysbottoy:latest && docker push harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }} && nicklesbread/clearys-bot-toy:${{ github.run_number }}
+        run: docker push harbor.nicleary.com/library/clearysbottoy:latest && docker push harbor.nicleary.com/library/clearysbottoy:${{ github.run_number }} && docker push nicklesbread/clearys-bot-toy:${{ github.run_number }}
 
   trivy:
     needs: build
