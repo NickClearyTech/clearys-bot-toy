@@ -1,0 +1,17 @@
+metrics_server_config:
+  url: "https://discordmetrics.nicleary.com/api/v1"
+discord_server_id: 725357725546053685
+all_memes_config:
+  prophet_has_spoken:
+    users:
+      - 192024972644974592
+    channels:
+      - 992166504269357146
+  emacs_quotes:
+    users:
+      - 192024972644974592
+  guix_quotes:
+    users:
+      - 192024972644974592
+  devops_quotes: {}
+  jenkins: {}
