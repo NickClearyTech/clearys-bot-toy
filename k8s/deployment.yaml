@@ -21,11 +21,18 @@ spec:
       labels:
         app: clearybottoy
     spec:
+      volumes:
+        - name: config-volume
+          configMap:
+            name: configuration
       containers:
         - image: harbor.nicleary.com/library/clearysbottoy:@IMAGE_TAG
           imagePullPolicy: Always
           command: ['bash', '-c', 'python main.py']
           name: "clearys-bot-toy"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config
           env:
             - name: DISCORD_TOKEN
               valueFrom:

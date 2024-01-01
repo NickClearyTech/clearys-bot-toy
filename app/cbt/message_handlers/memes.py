@@ -1,6 +1,7 @@
 import random
 from discord.message import Message
 from message_handlers import handler
+from config.get_config import config_object
 from utils import emacs
 
 emacs_quotes_options = [
@@ -120,7 +121,7 @@ guix_quotes_option = [
     "guix package -i happiness\nFuck that didn't work.",
     "I packaged Windows XP as a guix package. Because I can. Some men just want to watch the world burn.",
     "guix is not only a package system. It is a way of life. One does not simply package their code with guix. They embody a bit of guix in their soul. You become a guix geek.",
-    "Honestly I don't understand all the hype around Gunoo Gewicks. Like, whats so special about it?"
+    "Honestly I don't understand all the hype around Gunoo Gewicks. Like, whats so special about it?",
 ]
 
 devops_quotes_options = [
@@ -134,20 +135,22 @@ devops_quotes_options = [
 
 # A bot handler to reply with "THE PROPHET HAS SPOKEN" whenever richard mentions emacs in the emacs channel
 @handler(
-    name="Prophet has spoken", channels=[992166504269357146], users=[192024972644974592]
+    name="Prophet has spoken",
+    channels=config_object.all_memes_config.prophet_has_spoken.channels,
+    users=config_object.all_memes_config.prophet_has_spoken.users,
 )
 async def prophet_has_spoken(message: Message):
     if "emacs" in message.content.lower():
         await message.reply("*THE PROPHET HAS SPOKEN*")
 
 
-@handler(name="Emacs quotes", users=[192024972644974592])
+@handler(name="Emacs quotes", users=config_object.all_memes_config.emacs_quotes.users)
 async def emacs_quotes(message: Message):
     if "emacs" in message.content.lower() and random.randint(1, 10) > 3:
         await message.reply(random.choice(emacs_quotes_options))
 
 
-@handler(name="Guix Quotes", users=[192024972644974592])
+@handler(name="Guix Quotes", users=config_object.all_memes_config.guix_quotes.users)
 async def guix_quotes(message: Message):
     if "guix" in message.content.lower() and random.randint(1, 10) > 3:
         await message.reply(random.choice(guix_quotes_option))

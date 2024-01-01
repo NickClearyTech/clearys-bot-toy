@@ -62,23 +62,23 @@ jobs:
         with:
           sarif_file: 'trivy-results.sarif'
 
-#  semgrep:
-#    name: Semgrep
-#    runs-on: nicleary-ubuntu-k8s
-#    needs: build
-#    env:
-#      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
-#    container:
-#      image: returntocorp/semgrep
-#    steps:
-#      - uses: actions/checkout@v3
-#      - run: semgrep ci --sarif --output=semgrep.sarif
-#
-#      - name: Upload SARIF file for GitHub Advanced Security Dashboard
-#        uses: github/codeql-action/upload-sarif@v2
-#        with:
-#          sarif_file: semgrep.sarif
-#        if: always()
+  semgrep:
+    name: Semgrep
+    runs-on: nicleary-ubuntu-k8s
+    needs: build
+    env:
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+    container:
+      image: returntocorp/semgrep
+    steps:
+      - uses: actions/checkout@v3
+      - run: semgrep ci --sarif --output=semgrep.sarif
+
+      - name: Upload SARIF file for GitHub Advanced Security Dashboard
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: semgrep.sarif
+        if: always()
 
   codeql:
     needs: build
@@ -113,9 +113,14 @@ jobs:
 
   deploy:
     runs-on: nicleary-ubuntu-k8s
+    container:
+      image: harbor.nicleary.com/dockerhub/dtzar/helm-kubectl:3.13.3
+    env:
+      KUBECONFIG_DATA: ${{ secrets.RANCHER_KUBECONFIG }}
     needs:
       - codeql
       - trivy
+      - semgrep
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -127,9 +132,10 @@ jobs:
           replace: "${{ github.run_number }}"
           regex: false
 
-      - name: Deploy
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.RANCHER_KUBECONFIG }}
-        with:
-          args: apply -f k8s -n clearybottoy
+      - name: Run kubectl
+        run: |
+          echo ${{ secrets.RANCHER_KUBECONFIG }} | base64 -d > kube.config
+          kubectl --kubeconfig kube.config config get-contexts
+          kubectl --kubeconfig kube.config create configmap configuration --from-file=config.yaml=production_config.yaml -n clearybottoy -o yaml --dry-run | kubectl apply -f -
+          kubectl apply --kubeconfig apply -f k8s -n clearybottoy
+

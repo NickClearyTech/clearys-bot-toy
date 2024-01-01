@@ -9,7 +9,9 @@ from utils.client import tree, client
 from utils.utils import get_token, get_server
 from discord import Status, CustomActivity
 from message_handlers import __handlers__
-from config.get_config import get_config
+
+# Importing this year ends up creating the config object
+from config import get_config
 
 import logging
 
@@ -41,5 +43,5 @@ async def on_message(message: discord.Message):
         handler = getattr(sys.modules[module], func_name)
         await handler(message)
 
-get_config()
+
 client.run(get_token(), log_handler=handler)

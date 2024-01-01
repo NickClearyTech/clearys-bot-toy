@@ -10,7 +10,7 @@ services:
       - .env
     volumes:
       - ./app/cbt:/cbt
-      - ./config.yaml:/config.yaml
+      - ./config.yaml:/config/config.yaml
     command: ["python3", "main.py"]
   discorddata_backend:
     image: nicklesbread/discord-metrics-server:api-32
