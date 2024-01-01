@@ -136,6 +136,7 @@ jobs:
         run: |
           echo ${{ secrets.RANCHER_KUBECONFIG }} | base64 -d > kube.config
           kubectl --kubeconfig kube.config config get-contexts
-          kubectl --kubeconfig kube.config create configmap configuration --from-file=config.yaml=production_config.yaml -n clearybottoy -o yaml --dry-run | kubectl --kubeconfig kube.config apply -f -
+          kubectl --kubeconfig kube.config create configmap configuration --from-file=config.yaml=production_config.yaml -n clearybottoy -o yaml --dry-run > configmap.yaml
+          kubectl --kubeconfig kube.config apply -f configmap.yaml
           kubectl apply --kubeconfig apply -f k8s -n clearybottoy
 
