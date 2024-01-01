@@ -1,4 +1,6 @@
 import os
+import logging
+from config.get_config import config_object
 
 
 def get_token():
@@ -9,10 +11,10 @@ def get_token():
 
 
 def get_server():
-    if os.environ.get("DISCORD_SERVER", None) is None:
-        print("ERROR: INVALID SERVER")
+    if config_object.discord_server_id is None:
+        logging.fatal("ERROR: INVALID DISCORD TOKEN")
         exit(1)
-    return os.environ.get("DISCORD_SERVER", None)
+    return config_object.discord_server_id
 
 
 # Wraps a set of text in a code block

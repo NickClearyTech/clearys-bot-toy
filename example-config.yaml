@@ -1,0 +1,25 @@
+# Configuration for where to find the metrics server, this will usually remain static if using the docker compose build
+metrics_server_config:
+  url: "http://discorddata_backend:8080/api/v1"
+# The ID of your discord test server
+discord_server_id: 725357725546053685
+# The below are all optional, but if not provided, must be configured as {}, like how the jenkins config is setup
+all_memes_config:
+  prophet_has_spoken:
+    # Which users to trigger on
+    users:
+      - 475488656170156039
+    # Which channels to configure on
+    channels:
+      - 725357726133125223
+  emacs_quotes:
+    users:
+      - 475488656170156039
+  guix_quotes:
+    users:
+      - 475488656170156039
+  devops_quotes: {}
+  jenkins: {}
+
+# Note that the above configs are for a test server, not the production Suffering Inc server
+# For editing the production deploy, simply edit the production_confing.yaml with the relevant values
