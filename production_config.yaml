@@ -4,14 +4,29 @@ discord_server_id: 790420576468205628
 all_memes_config:
   prophet_has_spoken:
     users:
+      # Richard
       - 192024972644974592
     channels:
+      # Emacs channel
       - 992166504269357146
   emacs_quotes:
     users:
+      # Richard
       - 192024972644974592
   guix_quotes:
     users:
+      # Richard
       - 192024972644974592
   devops_quotes: {}
   jenkins: {}
+  caustic:
+    users:
+    # Christen
+      - 410282526536499200
+    channels:
+      # apex channel
+      - 798313635981164574
+  chris:
+    users:
+    # Christen
+      - 410282526536499200
