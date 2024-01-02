@@ -140,31 +140,31 @@ devops_quotes_options = [
     users=config_object.all_memes_config.prophet_has_spoken.users,
 )
 async def prophet_has_spoken(message: Message):
-    if "emacs" in message.content.lower():
+    if "emacs".casefold() in message.content.casefold():
         await message.reply("*THE PROPHET HAS SPOKEN*")
 
 
 @handler(name="Emacs quotes", users=config_object.all_memes_config.emacs_quotes.users)
 async def emacs_quotes(message: Message):
-    if "emacs" in message.content.lower() and random.randint(1, 10) > 3:
+    if "emacs".casefold() in message.content.casefold() and random.randint(1, 10) > 3:
         await message.reply(random.choice(emacs_quotes_options))
 
 
 @handler(name="Guix Quotes", users=config_object.all_memes_config.guix_quotes.users)
 async def guix_quotes(message: Message):
-    if "guix" in message.content.lower() and random.randint(1, 10) > 3:
+    if "guix".casefold() in message.content.casefold() and random.randint(1, 10) > 3:
         await message.reply(random.choice(guix_quotes_option))
 
 
 @handler(name="DevOps")
 async def devops_quotes(message: Message):
-    if "devops" in message.content.lower() and random.randint(1, 10) > 3:
+    if "devops".casefold() in message.content.casefold() and random.randint(1, 10) > 3:
         await message.reply(random.choice(devops_quotes_options))
 
 
 @handler(name="Jenkins")
 async def jenkins_triggers_nick(message: Message):
-    if "jenkins" in message.content.lower():
+    if "jenkins".casefold() in message.content.casefold():
         await message.reply(
             f"Hey <@{str(475488656170156039)}> Get this! This guys LIKES Jenkins!"
         )

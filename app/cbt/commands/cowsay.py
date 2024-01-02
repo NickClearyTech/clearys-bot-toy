@@ -18,6 +18,9 @@ from utils.utils import get_server
 async def cowsay(
     interaction: discord.Interaction, content: str, character: str = "cow"
 ) -> None:
+    # lower() is not the preferred method of case insensitive case
+    # comparison, but unfortunately cowsay appears to use lower() in
+    # get_output_string() instead of casefold().
     if character.lower() not in char_names:
         await interaction.response.send_message(
             f"Invalid character name, I don't know {character}! Valid character names are: {char_names}"
