@@ -29,6 +29,8 @@ class AllMemesConfig(BaseModel):
     guix_quotes: MemeConfig
     devops_quotes: MemeConfig
     jenkins: MemeConfig
+    caustic: MemeConfig
+    chris: MemeConfig
 
 
 class Config(BaseModel):

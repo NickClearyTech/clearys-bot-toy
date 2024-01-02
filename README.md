@@ -8,6 +8,8 @@ The Source Code for the Cleary's Bot Toy discord Bot
 - Enable Developer mode in your discord client
 - Create a `.env` (named exactly as `.env`, which is gitignored) file, following the format of the `example.env` file
 - In this .env file, add your discord token and the ID of your test server
+- Copy example-config.yaml to config.yaml
+- Customize the values for your given test server
 - Run `docker compose build`
 - Run `docker compose up`
 
