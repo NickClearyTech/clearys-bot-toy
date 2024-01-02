@@ -4,6 +4,7 @@ import random
 
 import discord
 
+from metrics.users import upload_all_users
 from utils import bot_activities
 from utils.client import tree, client
 from utils.utils import get_token, get_server
@@ -21,6 +22,8 @@ handler.level = logging.INFO
 
 @client.event
 async def on_ready():
+    await upload_all_users(client)
+
     logging.warning(f"Loaded {len(__handlers__)} handlers")
     await client.change_presence(
         status=Status.online,
