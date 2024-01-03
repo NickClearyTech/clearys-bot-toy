@@ -12,21 +12,25 @@ caustic_memes: List[str] = [
     "Careful now. You don't want to trigger Shadi by mentioning the cursed character. Shhhh calming Watson noises",
     "Remember when Caustic was good? Pepperidge farm remembers.",
     "Cause these booty cheeks be clappin",
-    "Pathfinder is trying to find a path to Caustics thicc ass"
+    "Pathfinder is trying to find a path to Caustics thicc ass",
 ]
 
 
-@handler(name="Christen Mentions Causthicc",
-         channels=config_object.all_memes_config.caustic.channels,
-         users=config_object.all_memes_config.caustic.users)
+@handler(
+    name="Christen Mentions Causthicc",
+    channels=config_object.all_memes_config.caustic.channels,
+    users=config_object.all_memes_config.caustic.users,
+)
 async def christen_mentions_caustic(message: Message):
     if "caustic".casefold() in message.content.casefold() and random.randint(1, 10) > 3:
         await message.reply(random.choice(caustic_memes))
 
 
-@handler(name="Christen mentions his one true love, Chris",
-         channels=config_object.all_memes_config.chris.channels,
-         users=config_object.all_memes_config.chris.users)
+@handler(
+    name="Christen mentions his one true love, Chris",
+    channels=config_object.all_memes_config.chris.channels,
+    users=config_object.all_memes_config.chris.users,
+)
 async def christen_mentions_chris(message: Message):
     logging.warning(message.content.casefold())
     if "chris".casefold() in message.content.casefold():
