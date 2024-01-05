@@ -9,7 +9,7 @@ from utils.utils import get_server, logger
 @tree.command(name="redploy", guild=discord.Object(get_server()))
 async def redeploy(interaction: discord.Interaction):
     logger.info("Starting redeploy")
-    await interaction.channel.send("I'm redeploying myself. Go fuck yourself.")
+    await interaction.response.send_message("I'm redeploying myself. Go fuck yourself.")
     auth = Auth.Token(config_object.github.token)
     g = Github(auth=auth)
 
@@ -21,4 +21,4 @@ async def redeploy(interaction: discord.Interaction):
         if workflow.name == config_object.github.workflow_name:
             workflow.create_dispatch(ref="main")
 
-    await interaction.response.send_message("Successfully started redeploy")
+    await interaction.channel.send("Successfully started redeploy")
