@@ -22,6 +22,10 @@ all_memes_config:
   jenkins: {}
   caustic: {}
   chris: {}
+github:
+  owner: NickClearyTech
+  repo: clearys-bot-toy
+  workflow_name: "Main Action"
 
 # Note that the above configs are for a test server, not the production Suffering Inc server
 # For editing the production deploy, simply edit the production_confing.yaml with the relevant values

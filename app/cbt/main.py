@@ -33,7 +33,6 @@ async def on_ready():
 @client.event
 async def on_message(message: discord.Message):
     logger.info(f"Message from {message.author}: {message.content}")
-    logger.info(message.__dict__)
     # If bot, we don't care, return
     if message.author.bot:
         return

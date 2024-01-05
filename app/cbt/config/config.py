@@ -13,6 +13,13 @@ class MetricsServerConfig(BaseModel):
     api_key: Optional[str] = os.getenv("METRICS_API_KEY", None)
 
 
+class GitHubConfiig(BaseModel):
+    owner: Optional[str]
+    repo: Optional[str]
+    workflow_name: Optional[str]
+    token: Optional[str] = os.getenv("GITHUB_TOKEN", None)
+
+
 class MemeConfig(BaseModel):
     """
     Represents the users, servers, and channels for which a particular meme will apply to
@@ -37,3 +44,4 @@ class Config(BaseModel):
     metrics_server_config: MetricsServerConfig
     discord_server_id: int
     all_memes_config: AllMemesConfig
+    github: GitHubConfiig
