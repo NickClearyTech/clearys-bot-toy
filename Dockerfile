@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM harbor.nicleary.com/dockerhub/library/python:3.11
 
 WORKDIR /cbt
 
