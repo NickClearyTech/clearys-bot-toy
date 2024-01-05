@@ -1,12 +1,10 @@
-import logging
-
 import aiohttp
 
 from config.get_config import config_object
 
 import discord
 
-from utils.utils import get_server
+from utils.utils import get_server, logger
 
 
 async def check_and_upload_user(member: discord.Member, session: aiohttp.ClientSession):
@@ -23,15 +21,15 @@ async def check_and_upload_user(member: discord.Member, session: aiohttp.ClientS
             f"{config_object.metrics_server_config.url}/user", json=user_data
         )
         if create_result.status == 201:
-            logging.warning(f"User {member.id} created successfully")
+            logger.info(f"User {member.id} created successfully")
         else:
-            logging.error(
+            logger.error(
                 f"Error creating user object: {user_data}. Error {await create_result.json()}"
             )
             exit(1)
 
     else:
-        logging.warning(f"User with ID {member.id} already exists")
+        logger.info(f"User with ID {member.id} already exists")
 
 
 async def upload_all_users(client: discord.Client):

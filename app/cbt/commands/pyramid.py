@@ -1,10 +1,9 @@
 import discord
-import logging
 
 from discord import app_commands
 
 from utils.client import tree
-from utils.utils import get_server
+from utils.utils import get_server, logger
 
 
 @tree.command(name="pyramid_user", guild=discord.Object(get_server()))
@@ -13,7 +12,7 @@ from utils.utils import get_server
 async def pyramid_user(
     interaction: discord.Interaction, user: discord.Member, depth: int = 8
 ):
-    logging.warning("Pyramid requested for user")
+    logger.info("Pyramid requested for user")
     if depth > 12:
         await interaction.response.send_message(
             "Maximum supported depth is 13! Otherwise wierd formatting bullshit looks ugly. Also it fucks with my rate limit"
@@ -31,4 +30,4 @@ async def pyramid_user(
     for i in range(depth - 1, 0, -1):
         message_content = message_template * i
         await interaction.channel.send(message_content)
-    logging.warning("Pyramid completed")
+    logger.info("Pyramid completed")

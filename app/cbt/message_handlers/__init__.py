@@ -1,12 +1,12 @@
 import functools
 import importlib
-import logging
 import pkgutil
 import inspect
 from typing import Callable, List
 
 from attr.converters import optional
 from discord import Message
+from utils.utils import logger
 
 __handlers__ = []
 
@@ -36,7 +36,7 @@ def handler(
                 return None
             if servers is not None and message.guild.id not in servers:
                 return None
-            logging.warning(f"Running handler: {name}")
+            logger.info(f"Running handler: {name}")
             return await func(*args, **kwargs)
 
         __handlers__.append((name, inspect.getmodule(func).__name__, func.__name__))

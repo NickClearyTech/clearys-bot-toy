@@ -1,10 +1,10 @@
-import logging
 import random
 from typing import List
 
 from discord.message import Message
 from message_handlers import handler
 from config.get_config import config_object
+from utils.utils import logger
 
 caustic_memes: List[str] = [
     "Caustic? I think you mean Caus-too-thicc-for-me",
@@ -32,7 +32,7 @@ async def christen_mentions_caustic(message: Message):
     users=config_object.all_memes_config.chris.users,
 )
 async def christen_mentions_chris(message: Message):
-    logging.warning(message.content.casefold())
+    logger.debug(message.content.casefold())
     if "chris".casefold() in message.content.casefold():
         # React with the chris emoji
         for emoji in message.guild.emojis:
