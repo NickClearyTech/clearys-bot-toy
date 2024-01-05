@@ -11,4 +11,9 @@ bot_activites: List[str] = [
     "Committing tax fraud",
     "Considering letting you live",
     "Finding your family",
+    "Making overtime",
+    "Feeding my own source code to the wolves",
+    "Making ChatGPT look smart",
+    "Grabbing the chastity key",
+    "Deleting you",
 ]
