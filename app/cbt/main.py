@@ -42,4 +42,7 @@ async def on_message(message: discord.Message):
         await handler(message)
 
 init_logger()
-client.run(get_token(), log_handler=log_handler)
+try:
+    client.run(get_token(), log_handler=log_handler)
+except Exception as e:
+    logger.critical(e)

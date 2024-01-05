@@ -7,9 +7,10 @@ logger :logging.Logger = logging.getLogger('main')
 log_handler :logging.StreamHandler = logging.StreamHandler(sys.stdout)
 
 def get_token():
-    if token := os.environ.get("DISCORD_TOKEN", None) is None:
+    if (token := os.environ.get("DISCORD_TOKEN", None)) is None:
         logger.critical("ERROR: INVALID TOKEN")
         exit(1)
+    logger.debug(f"Token is {token}")
     return token
 
 
@@ -17,26 +18,28 @@ def get_server():
     if config_object.discord_server_id is None:
         logger.critical("ERROR: INVALID DISCORD TOKEN")
         exit(1)
+    logger.debug(f"Server is {config_object.discord_server_id}")
     return config_object.discord_server_id
 
 
 def init_logger():
-    env_log_level = os.environ.get("LOG_LEVEL", None).upper
+    logger.addHandler(log_handler)
+    env_log_level = os.environ.get("LOG_LEVEL", "INFO")
 
-    if env_log_level == "CRITICAL":
-        logger.setLevel(logging.CRITICAL)
-    elif env_log_level == "ERROR":
-        logger.setLevel(logging.ERROR)
-    elif env_log_level == "WARNING" or env_log_level == "WARN":
-        logger.setLevel(logging.WARNING)
-    elif env_log_level == "INFO":
-        logger.setLevel(logging.INFO)
-    elif env_log_level == "DEBUG":
-        logger.setLevel(logging.DEBUG)
-    else:
-        logging.info("No log level provided. Defaulting to INFO.")
-        logger.setLevel(logging.INFO)
-        
+    match env_log_level:
+        case "CRITICAL":
+            logger.setLevel(logging.CRITICAL)
+        case "ERROR":
+            logger.setLevel(logging.ERROR)
+        case "WARNING" | "WARN":
+            logger.setLevel(logging.WARNING)
+        case "INFO":
+            logger.setLevel(logging.INFO)
+        case "DEBUG":
+            logger.setLevel(logging.DEBUG)
+        case _:
+            logger.setLevel(logging.INFO)
+            
 
 # Wraps a set of text in a code block
 # This avoid issues with double slashes \\, that the discord util escape markdown does not handle
