@@ -31,7 +31,10 @@ def get_chance(percent: int = 20) -> bool:
     :type percent: int The percent chance to return true
     :return: bool
     """
-    return random.randrange(100) < percent
+    logger.info(f"Chance is {percent}")
+    value = random.randrange(100)
+    logger.info(f"Value is {value}")
+    return value < percent
 
 
 def init_logger():
