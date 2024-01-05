@@ -1,13 +1,9 @@
-import logging
-
 import discord
 from cowsay import get_output_string, char_names
 from discord import app_commands
 
-from utils.utils import codeify
-
 from utils.client import tree
-from utils.utils import get_server
+from utils.utils import get_server, logger, codeify
 
 
 @tree.command(name="cowsay", guild=discord.Object(get_server()))
@@ -25,17 +21,17 @@ async def cowsay(
         await interaction.response.send_message(
             f"Invalid character name, I don't know {character}! Valid character names are: {char_names}"
         )
-        logging.warning(f"Invalid character requested for cowsay: {character}")
+        logger.info(f"Invalid character requested for cowsay: {character}")
         return
     await interaction.response.send_message(
         codeify(get_output_string(character, content))
     )
-    logging.warning("Cowsay activated!")
+    logger.info("Cowsay activated!")
 
 
 @cowsay.error
 async def cowsay_error(ctx, error):
-    logging.error(error)
+    logger.error(error)
     await ctx.send(
         f"An unknown error has occured! Ping nick and tell him he's a dipshit! Because you're all intelligent: here's the error: {error}"
     )

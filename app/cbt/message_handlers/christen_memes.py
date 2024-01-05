@@ -1,4 +1,3 @@
-import logging
 import random
 from typing import List
 
@@ -6,6 +5,7 @@ from discord.message import Message
 from message_handlers import handler
 from config.get_config import config_object
 from utils.utils import get_chance
+from utils.utils import logger
 
 caustic_memes: List[str] = [
     "Caustic? I think you mean Caus-too-thicc-for-me",
