@@ -1,5 +1,7 @@
 import os
 import logging
+import random
+
 from config.get_config import config_object
 
 
@@ -15,6 +17,14 @@ def get_server():
         logging.fatal("ERROR: INVALID DISCORD TOKEN")
         exit(1)
     return config_object.discord_server_id
+
+
+def get_chance() -> bool:
+    """
+    Returns true 20% of the time. This is hard coded for memes to no be oppressive
+    :return: bool
+    """
+    return random.randint(1, 10) > 8
 
 
 # Wraps a set of text in a code block

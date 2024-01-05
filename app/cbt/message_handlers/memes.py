@@ -3,6 +3,7 @@ from discord.message import Message
 from message_handlers import handler
 from config.get_config import config_object
 from utils import emacs
+from utils.utils import get_chance
 
 emacs_quotes_options = [
     # Due to limitations with Emacs string concatenation in the manner
@@ -140,31 +141,31 @@ devops_quotes_options = [
     users=config_object.all_memes_config.prophet_has_spoken.users,
 )
 async def prophet_has_spoken(message: Message):
-    if "emacs".casefold() in message.content.casefold():
+    if "emacs".casefold() in message.content.casefold() and get_chance():
         await message.reply("*THE PROPHET HAS SPOKEN*")
 
 
 @handler(name="Emacs quotes", users=config_object.all_memes_config.emacs_quotes.users)
 async def emacs_quotes(message: Message):
-    if "emacs".casefold() in message.content.casefold() and random.randint(1, 10) > 3:
+    if "emacs".casefold() in message.content.casefold() and get_chance():
         await message.reply(random.choice(emacs_quotes_options))
 
 
 @handler(name="Guix Quotes", users=config_object.all_memes_config.guix_quotes.users)
 async def guix_quotes(message: Message):
-    if "guix".casefold() in message.content.casefold() and random.randint(1, 10) > 3:
+    if "guix".casefold() in message.content.casefold() and get_chance():
         await message.reply(random.choice(guix_quotes_option))
 
 
 @handler(name="DevOps")
 async def devops_quotes(message: Message):
-    if "devops".casefold() in message.content.casefold() and random.randint(1, 10) > 3:
+    if "devops".casefold() in message.content.casefold() and get_chance():
         await message.reply(random.choice(devops_quotes_options))
 
 
 @handler(name="Jenkins")
 async def jenkins_triggers_nick(message: Message):
-    if "jenkins".casefold() in message.content.casefold():
+    if "jenkins".casefold() in message.content.casefold() and get_chance():
         await message.reply(
             f"Hey <@{str(475488656170156039)}> Get this! This guys LIKES Jenkins!"
         )

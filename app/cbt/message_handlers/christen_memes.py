@@ -5,6 +5,7 @@ from typing import List
 from discord.message import Message
 from message_handlers import handler
 from config.get_config import config_object
+from utils.utils import get_chance
 
 caustic_memes: List[str] = [
     "Caustic? I think you mean Caus-too-thicc-for-me",
@@ -22,7 +23,7 @@ caustic_memes: List[str] = [
     users=config_object.all_memes_config.caustic.users,
 )
 async def christen_mentions_caustic(message: Message):
-    if "caustic".casefold() in message.content.casefold() and random.randint(1, 10) > 3:
+    if "caustic".casefold() in message.content.casefold() and get_chance():
         await message.reply(random.choice(caustic_memes))
 
 
@@ -32,7 +33,6 @@ async def christen_mentions_caustic(message: Message):
     users=config_object.all_memes_config.chris.users,
 )
 async def christen_mentions_chris(message: Message):
-    logging.warning(message.content.casefold())
     if "chris".casefold() in message.content.casefold():
         # React with the chris emoji
         for emoji in message.guild.emojis:
