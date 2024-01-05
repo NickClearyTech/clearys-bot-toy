@@ -13,7 +13,9 @@ async def redeploy(interaction: discord.Interaction):
     auth = Auth.Token(config_object.github.token)
     g = Github(auth=auth)
 
-    repo = g.get_organization(config_object.github.owner).get_repo(config_object.github.repo)
+    repo = g.get_organization(config_object.github.owner).get_repo(
+        config_object.github.repo
+    )
 
     for workflow in repo.get_workflows():
         if workflow.name == config_object.github.workflow_name:

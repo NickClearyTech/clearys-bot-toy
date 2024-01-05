@@ -15,5 +15,5 @@ bot_activites: List[str] = [
     "Feeding my own source code to the wolves",
     "Making ChatGPT look smart",
     "Grabbing the chastity key",
-    "Deleting you"
+    "Deleting you",
 ]
