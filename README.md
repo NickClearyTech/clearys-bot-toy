@@ -7,7 +7,8 @@ The Source Code for the Cleary's Bot Toy discord Bot
 - Create a "test server" and invite your bot to it
 - Enable Developer mode in your discord client
 - Create a `.env` (named exactly as `.env`, which is gitignored) file, following the format of the `example.env` file
-- In this .env file, add your discord token and the ID of your test server
+- In this .env file, add your discord token and desired log level
+    - Valid log levels are `CRITICAL`, `ERROR`, `WARNING`, `INFO`, and `DEBUG`
 - Copy example-config.yaml to config.yaml
 - Customize the values for your given test server
 - Run `docker compose build`
