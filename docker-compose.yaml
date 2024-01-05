@@ -45,7 +45,7 @@ services:
     image: mariadb
     restart: always
     environment:
-      MARIADB_RANDOM_ROOT_PASSWORD: true
+      MARIADB_RANDOM_ROOT_PASSWORD: "true"
       MYSQL_DATABASE: discorddata
       MYSQL_USER: mysql
       MYSQL_PASSWORD: mysql
