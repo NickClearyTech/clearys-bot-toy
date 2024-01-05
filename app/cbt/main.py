@@ -11,7 +11,7 @@ from utils.utils import get_token, get_server, log_handler, logger, init_logger
 from discord import Status, CustomActivity
 from message_handlers import __handlers__
 
-# Importing this year ends up creating the config object
+# Importing this here ends up creating the config object
 from config import get_config
 
 

@@ -3,6 +3,7 @@
 version: "3.8"
 services:
   bot:
+    read_only: true
     build:
       context: .
       dockerfile: Dockerfile
@@ -13,6 +14,7 @@ services:
       - ./config.yaml:/config/config.yaml
     command: ["python3", "main.py"]
   discorddata_backend:
+    read_only: true
     image: nicklesbread/discord-metrics-server:api-32
     environment:
       MARIA_USER: mysql
@@ -26,6 +28,7 @@ services:
       discorddata_atlas_run_migrations:
         condition: service_completed_successfully
   discorddata_atlas_run_migrations:
+    read_only: true
     image: nicklesbread/discord-metrics-server:migrations-32
     entrypoint:
       - "atlas"
