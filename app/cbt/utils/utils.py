@@ -5,7 +5,7 @@ import random
 
 from config.get_config import config_object
 
-logger: logging.Logger = logging.getLogger('main')
+logger: logging.Logger = logging.getLogger("main")
 log_handler: logging.StreamHandler = logging.StreamHandler(sys.stdout)
 
 

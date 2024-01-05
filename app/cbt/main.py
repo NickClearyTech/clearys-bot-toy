@@ -18,7 +18,7 @@ from config import get_config
 @client.event
 async def on_ready():
     await upload_all_users(client)
-    
+
     logger.info(f"Loaded {len(__handlers__)} handlers")
     await client.change_presence(
         status=Status.online,
@@ -40,6 +40,7 @@ async def on_message(message: discord.Message):
     for _, module, func_name in __handlers__:
         handler = getattr(sys.modules[module], func_name)
         await handler(message)
+
 
 init_logger()
 try:

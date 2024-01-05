@@ -1,7 +1,5 @@
 import discord
 
-from discord import app_commands
-
 from utils.client import tree
 from utils.utils import get_server, logger
 
