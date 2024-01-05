@@ -7,24 +7,19 @@ import discord
 from metrics.users import upload_all_users
 from utils import bot_activities
 from utils.client import tree, client
-from utils.utils import get_token, get_server
+from utils.utils import get_token, get_server, log_handler, logger, init_logger
 from discord import Status, CustomActivity
 from message_handlers import __handlers__
 
 # Importing this year ends up creating the config object
 from config import get_config
 
-import logging
-
-handler = logging.StreamHandler(sys.stdout)
-handler.level = logging.INFO
-
 
 @client.event
 async def on_ready():
     await upload_all_users(client)
-
-    logging.warning(f"Loaded {len(__handlers__)} handlers")
+    
+    logger.info(f"Loaded {len(__handlers__)} handlers")
     await client.change_presence(
         status=Status.online,
         activity=CustomActivity(name=random.choice(bot_activities.bot_activites)),
@@ -32,12 +27,12 @@ async def on_ready():
     import commands
 
     await tree.sync(guild=discord.Object(get_server()))
-    logging.warning("Ready!")
+    logger.info("Ready!")
 
 
 @client.event
 async def on_message(message: discord.Message):
-    logging.warning(f"Message from {message.author}: {message.content}")
+    logger.info(f"Message from {message.author}: {message.content}")
     # If bot, we don't care, return
     if message.author.bot:
         return
@@ -46,5 +41,5 @@ async def on_message(message: discord.Message):
         handler = getattr(sys.modules[module], func_name)
         await handler(message)
 
-
-client.run(get_token(), log_handler=handler)
+init_logger()
+client.run(get_token(), log_handler=log_handler)

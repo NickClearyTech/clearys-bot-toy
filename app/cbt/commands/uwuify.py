@@ -1,11 +1,9 @@
-import logging
-
 import discord
 import uwuify
 from discord import app_commands
 
 from utils.client import tree
-from utils.utils import get_server
+from utils.utils import get_server, logger
 
 
 @tree.command(name="uwuify_text", guild=discord.Object(get_server()))
@@ -20,7 +18,7 @@ async def uwuify_text(
     yu: bool = False,
     stutter: bool = False,
 ):
-    logging.warning("UwUify called")
+    logger.info("UwUify called")
 
     if not text.endswith(".") and not text.endswith("!") and not text.endswith("?"):
         text += "."
@@ -39,7 +37,7 @@ async def uwuify_text(
 
 @uwuify_text.error
 async def uwuify_text_error(ctx, error):
-    logging.error(error)
+    logger.error(error)
     await ctx.send(
         f"An unknown error has occured! Man, you suck. But nick sucks more. Tell him he's a dumbass! Your error is: {error}. How did you manage that, you fuck?"
     )
