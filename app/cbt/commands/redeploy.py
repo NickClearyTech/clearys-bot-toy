@@ -12,9 +12,11 @@ from utils.text_manipulations import translate_text
 @app_commands.describe(
     output_language="the language for the command to translate to. Defaults to not translating the text."
 )
-async def redeploy(interaction: discord.Interaction, output_language:str=None):
+async def redeploy(interaction: discord.Interaction, output_language: str = None):
     logger.info("Starting redeploy")
-    await interaction.response.send_message(translate_text("I'm redeploying myself. Go fuck yourself.", output_language))
+    await interaction.response.send_message(
+        translate_text("I'm redeploying myself. Go fuck yourself.", output_language)
+    )
     auth = Auth.Token(config_object.github.token)
     g = Github(auth=auth)
 
@@ -26,4 +28,6 @@ async def redeploy(interaction: discord.Interaction, output_language:str=None):
         if workflow.name == config_object.github.workflow_name:
             workflow.create_dispatch(ref="main")
 
-    await interaction.channel.send(translate_text("Successfully started redeploy", output_language))
+    await interaction.channel.send(
+        translate_text("Successfully started redeploy", output_language)
+    )

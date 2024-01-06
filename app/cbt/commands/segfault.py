@@ -10,7 +10,7 @@ from utils.text_manipulations import translate_text
 @app_commands.describe(
     output_language="the language for the command to translate to. Defaults to not translating the text."
 )
-async def segfault(interaction: discord.Interaction, output_language:str = None):
+async def segfault(interaction: discord.Interaction, output_language: str = None):
     if get_chance():
         await interaction.response.send_message(translate_text("No u", output_language))
         return
