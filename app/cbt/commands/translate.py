@@ -48,7 +48,8 @@ async def get_languages_command(
     ]
 
     if language_code is not None:
-        logger.info(f"Fetting target languages for {language_code}")
+        language_code = language_code.casefold()
+        logger.info(f"Getting target languages for {language_code}")
         if language_code not in languages.keys():
             await interaction.response.send_message(
                 f"Invalid source language. Valid source languages are {source_language_list}"
