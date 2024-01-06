@@ -12,9 +12,13 @@ from utils.text_manipulations import translate_text
 )
 async def segfault(interaction: discord.Interaction, output_language: str = None):
     if get_chance():
-        await interaction.response.send_message(translate_text("No u", output_language))
+        await interaction.response.send_message(
+            await translate_text("No u", output_language)
+        )
         return
-    await interaction.response.send_message(translate_text("BRB KMS", output_language))
+    await interaction.response.send_message(
+        await translate_text("BRB KMS", output_language)
+    )
     logger.info("Segfault triggered")
     import ctypes
 
