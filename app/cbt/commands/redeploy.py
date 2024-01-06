@@ -6,7 +6,7 @@ from utils.client import tree
 from utils.utils import get_server, logger
 
 
-@tree.command(name="redploy", guild=discord.Object(get_server()))
+@tree.command(name="redeploy", guild=discord.Object(get_server()))
 async def redeploy(interaction: discord.Interaction):
     logger.info("Starting redeploy")
     await interaction.response.send_message("I'm redeploying myself. Go fuck yourself.")
