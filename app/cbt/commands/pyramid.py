@@ -5,7 +5,6 @@ from discord import app_commands
 from utils.client import tree
 from utils.utils import get_server, logger
 from utils.text_manipulations import translate_text
-from datetime import timedelta
 
 
 @tree.command(name="pyramid_user", guild=discord.Object(get_server()))

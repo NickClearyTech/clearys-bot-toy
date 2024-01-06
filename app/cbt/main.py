@@ -8,6 +8,7 @@ from metrics.users import upload_all_users
 from utils import bot_activities
 from utils.client import tree, client
 from utils.utils import get_token, get_server, log_handler, logger, init_logger
+from utils.text_manipulations import get_languages, translate_text
 from discord import Status, CustomActivity
 from message_handlers import __handlers__
 
@@ -20,9 +21,15 @@ async def on_ready():
     await upload_all_users(client)
 
     logger.info(f"Loaded {len(__handlers__)} handlers")
+
     await client.change_presence(
         status=Status.online,
-        activity=CustomActivity(name=random.choice(bot_activities.bot_activites)),
+        activity=CustomActivity(
+            name=await translate_text(
+                random.choice(bot_activities.bot_activites),
+                random.choice(list((await get_languages()).keys())),
+            )
+        ),
     )
     import commands
 
