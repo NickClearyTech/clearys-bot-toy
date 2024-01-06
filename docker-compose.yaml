@@ -10,8 +10,8 @@ services:
     env_file:
       - .env
     volumes:
-      - ./app/cbt:/cbt
-      - ./config.yaml:/config/config.yaml
+      - ./app/cbt:/cbt:ro
+      - ./config.yaml:/config/config.yaml:ro
     command: ["python3", "main.py"]
   discorddata_backend:
     read_only: true
