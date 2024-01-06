@@ -4,8 +4,6 @@ from discord import app_commands
 from utils.client import tree
 from utils.utils import get_server, logger
 from utils.text_manipulations import translate_text, get_languages
-from datetime import timedelta
-from time import sleep
 
 
 @tree.command(name="translate", guild=discord.Object(get_server()))
@@ -20,7 +18,6 @@ async def translate(
     output_language_code: str,
     input_language_code: str = "auto",
 ) -> None:
-    interaction.expires_at += timedelta(seconds=30)
     await interaction.response.send_message(
         await translate_text(
             content, output_language_code, source_language_in=input_language_code

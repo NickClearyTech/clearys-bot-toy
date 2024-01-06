@@ -1,7 +1,6 @@
 import discord
 from cowsay import get_output_string, char_names
 from discord import app_commands
-from datetime import timedelta
 from utils.client import tree
 from utils.utils import get_server, logger
 from utils.text_manipulations import codeify, translate_text
@@ -24,7 +23,6 @@ async def cowsay(
     # lower() is not the preferred method of case insensitive case
     # comparison, but unfortunately cowsay appears to use lower() in
     # get_output_string() instead of casefold().
-    interaction.expires_at += timedelta(seconds=30)
     if character.lower() not in char_names:
         await interaction.response.send_message(
             await translate_text(
