@@ -39,5 +39,10 @@ spec:
                 secretKeyRef:
                   name: discordtoken
                   key: discord_token
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: github_token
+                  name: discordtoken
             - name: DISCORD_SERVER
               value: "790420576468205628"
