@@ -5,7 +5,7 @@ import random
 
 from config.get_config import config_object
 
-logger: logging.Logger = logging.getLogger('main')
+logger: logging.Logger = logging.getLogger("main")
 log_handler: logging.StreamHandler = logging.StreamHandler(sys.stdout)
 
 
@@ -54,9 +54,3 @@ def init_logger():
             logger.setLevel(logging.DEBUG)
         case _:
             logger.setLevel(logging.INFO)
-
-
-# Wraps a set of text in a code block
-# This avoid issues with double slashes \\, that the discord util escape markdown does not handle
-def codeify(text: str):
-    return f"```{text}```"
