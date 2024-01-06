@@ -40,8 +40,14 @@ class AllMemesConfig(BaseModel):
     chris: MemeConfig
 
 
+class LibreTranslateServerConfig(BaseModel):
+    url: str
+    default_language: str
+
+
 class Config(BaseModel):
     metrics_server_config: MetricsServerConfig
+    libretranslate_server_config: LibreTranslateServerConfig
     discord_server_id: int
     all_memes_config: AllMemesConfig
     github: GitHubConfiig

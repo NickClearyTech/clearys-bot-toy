@@ -1,6 +1,12 @@
 # Configuration for where to find the metrics server, this will usually remain static if using the docker compose build
 metrics_server_config:
   url: "http://discorddata_backend:8080/api/v1"
+
+# Configuration for where to find the libretranslate server
+libretranslate_server_config:
+  default_language: "en"
+  url: "https://translate.nicleary.com/"
+
 # The ID of your discord test server
 discord_server_id: 725357725546053685
 # The below are all optional, but if not provided, must be configured as {}, like how the jenkins config is setup

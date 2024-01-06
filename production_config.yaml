@@ -1,5 +1,8 @@
 metrics_server_config:
   url: "https://discordmetrics.nicleary.com/api/v1"
+libretranslate_server_config:
+  default_language: "en"
+  url: "https://translate.nicleary.com/"
 discord_server_id: 790420576468205628
 all_memes_config:
   prophet_has_spoken:
