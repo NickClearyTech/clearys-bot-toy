@@ -33,3 +33,22 @@ Those using the GNU Guix package manager can make use of a script to format the 
 ```shell
 ./bin/format
 ```
+
+
+## Important Details
+
+### Requirements:
+1. Bot must meme
+2. Meme must bot.
+3. Cry.
+4. Cope
+
+### Test plan
+1. Meme
+
+### Architecture Plan:
+1. Meme all over them
+
+### License:
+
+4. Meme. :)
