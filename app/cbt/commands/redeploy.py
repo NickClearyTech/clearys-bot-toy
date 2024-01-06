@@ -7,12 +7,12 @@ from utils.client import tree
 from utils.utils import get_server, logger
 from utils.text_manipulations import translate_text
 
-
-@tree.command(name="redploy", guild=discord.Object(get_server()))
+@tree.command(name="redeploy", guild=discord.Object(get_server()))
 @app_commands.describe(
     output_language="the language for the command to translate to. Defaults to not translating the text."
 )
 async def redeploy(interaction: discord.Interaction, output_language: str = None):
+
     logger.info("Starting redeploy")
     await interaction.response.send_message(
         await translate_text(

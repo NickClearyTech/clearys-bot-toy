@@ -12,7 +12,7 @@ async def check_and_upload_user(member: discord.Member, session: aiohttp.ClientS
         f"{config_object.metrics_server_config.url}/user/{member.id}"
     )
     # If the user doesn't exist, create it
-    if result.status != 200:
+    if not result.ok:
         user_data = {
             "user_id": str(member.id),
             "date_joined": member.joined_at.strftime("%Y-%m-%d %H:%M:%S"),
@@ -20,7 +20,7 @@ async def check_and_upload_user(member: discord.Member, session: aiohttp.ClientS
         create_result = await session.post(
             f"{config_object.metrics_server_config.url}/user", json=user_data
         )
-        if create_result.status == 201:
+        if not create_result.ok:
             logger.info(f"User {member.id} created successfully")
         else:
             logger.error(
