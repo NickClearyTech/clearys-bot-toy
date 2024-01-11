@@ -21,7 +21,6 @@ def get_server():
     if config_object.discord_server_id is None:
         logger.critical("ERROR: INVALID DISCORD TOKEN")
         exit(1)
-    logger.debug(f"Server is {config_object.discord_server_id}")
     return config_object.discord_server_id
 
 
@@ -31,9 +30,9 @@ def get_chance(percent: int = 20) -> bool:
     :type percent: int The percent chance to return true
     :return: bool
     """
-    logger.info(f"Chance is {percent}")
+    logger.debug(f"Chance is {percent}")
     value = random.randrange(100)
-    logger.info(f"Value is {value}")
+    logger.debug(f"Value is {value}")
     return value < percent
 
 

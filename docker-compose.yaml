@@ -15,7 +15,7 @@ services:
     command: ["python3", "main.py"]
   discorddata_backend:
     read_only: true
-    image: nicklesbread/discord-metrics-server:api-32
+    image: nicklesbread/discord-metrics-server:api-34
     environment:
       MARIA_USER: mysql
       MARIA_PASSWORD: mysql
@@ -29,7 +29,7 @@ services:
         condition: service_completed_successfully
   discorddata_atlas_run_migrations:
     read_only: true
-    image: nicklesbread/discord-metrics-server:migrations-32
+    image: nicklesbread/discord-metrics-server:migrations-34
     entrypoint:
       - "atlas"
       - "migrate"
