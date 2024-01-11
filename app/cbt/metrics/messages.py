@@ -26,3 +26,9 @@ async def upload_message_to_metrics(message: discord.Message) -> None:
             )
             return
         logger.info(f"Successfully uploaded message {message.id} to metrics server")
+
+
+async def get_all_messages(client: discord.Client):
+    channels = (await client.fetch_guild(get_server())).channels.all()
+    for channel in channels:
+        logger.info(f"{channel.name}")
