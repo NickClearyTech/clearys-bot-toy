@@ -5,9 +5,10 @@ import random
 import discord
 
 from metrics.users import upload_all_users
+from metrics.messages import upload_message_to_metrics
 from utils import bot_activities
 from utils.client import tree, client
-from utils.utils import get_token, get_server, log_handler, logger, init_logger
+from utils.utils import get_token, get_server, log_handler, logger, init_logger, get_chance
 from utils.text_manipulations import get_languages, translate_text
 from discord import Status, CustomActivity
 from message_handlers import __handlers__
@@ -27,7 +28,7 @@ async def on_ready():
         activity=CustomActivity(
             name=await translate_text(
                 random.choice(bot_activities.bot_activites),
-                random.choice(list((await get_languages()).keys())),
+                "en" if not get_chance() else random.choice(list((await get_languages()).keys())),
             )
         ),
     )
@@ -47,6 +48,8 @@ async def on_message(message: discord.Message):
     for _, module, func_name in __handlers__:
         handler = getattr(sys.modules[module], func_name)
         await handler(message)
+
+    await upload_message_to_metrics(message)
 
 
 init_logger()
