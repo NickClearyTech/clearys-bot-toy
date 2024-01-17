@@ -39,3 +39,5 @@ async def christen_mentions_chris(message: Message):
             if emoji.name == "chris":
                 await message.add_reaction(emoji)
         await message.add_reaction("❤️")
+        await message.add_reaction("🍆")
+        await message.add_reaction("🥵")
