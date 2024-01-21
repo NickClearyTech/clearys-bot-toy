@@ -46,7 +46,6 @@ async def check_and_upload_user(member: discord.Member, session: aiohttp.ClientS
 async def upload_all_users(client: discord.Client):
     async with aiohttp.ClientSession() as session:
         # Assume just one server for now, easier
-        members = (await client.fetch_guild(get_server())).members
         guild = await client.fetch_guild(get_server())
         async for member in guild.fetch_members(limit=150):
             await check_and_upload_user(member, session)

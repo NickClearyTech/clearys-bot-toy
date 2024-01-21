@@ -48,7 +48,6 @@ async def on_message(message: discord.Message):
     for _, module, func_name in __handlers__:
         handler = getattr(sys.modules[module], func_name)
         await handler(message)
-    await get_all_messages(client)
     await upload_message_to_metrics(message)
 
 
