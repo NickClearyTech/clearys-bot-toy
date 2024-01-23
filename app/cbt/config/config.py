@@ -4,15 +4,6 @@ import os
 from pydantic import BaseModel, HttpUrl
 
 
-class MetricsServerConfig(BaseModel):
-    """
-    Configuration for the metrics server
-    """
-
-    url: HttpUrl
-    api_key: Optional[str] = os.getenv("METRICS_API_KEY", None)
-
-
 class GitHubConfiig(BaseModel):
     owner: Optional[str]
     repo: Optional[str]
@@ -46,7 +37,6 @@ class LibreTranslateServerConfig(BaseModel):
 
 
 class Config(BaseModel):
-    metrics_server_config: MetricsServerConfig
     libretranslate_server_config: LibreTranslateServerConfig
     discord_server_id: int
     all_memes_config: AllMemesConfig
