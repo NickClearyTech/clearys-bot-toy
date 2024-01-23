@@ -1,11 +1,8 @@
-import asyncio
 import sys
 import random
 
 import discord
 
-from metrics.users import upload_all_users
-from metrics.messages import upload_message_to_metrics
 from utils import bot_activities
 from utils.client import tree, client
 from utils.utils import get_token, get_server, log_handler, logger, init_logger, get_chance
@@ -19,7 +16,6 @@ from config import get_config
 
 @client.event
 async def on_ready():
-    await upload_all_users(client)
 
     logger.info(f"Loaded {len(__handlers__)} handlers")
 
@@ -48,8 +44,6 @@ async def on_message(message: discord.Message):
     for _, module, func_name in __handlers__:
         handler = getattr(sys.modules[module], func_name)
         await handler(message)
-
-    await upload_message_to_metrics(message)
 
 
 init_logger()
