@@ -24,6 +24,7 @@ all_memes_config:
   jenkins: {}
   caustic: {}
   chris: {}
+  taytay: {}
 github:
   owner: NickClearyTech
   repo: clearys-bot-toy
