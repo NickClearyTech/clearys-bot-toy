@@ -29,7 +29,7 @@ class AllMemesConfig(BaseModel):
     jenkins: MemeConfig
     caustic: MemeConfig
     chris: MemeConfig
-
+    taytay: MemeConfig
 
 class LibreTranslateServerConfig(BaseModel):
     url: str
