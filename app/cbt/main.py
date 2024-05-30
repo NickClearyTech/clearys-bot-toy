@@ -5,7 +5,14 @@ import discord
 
 from utils import bot_activities
 from utils.client import tree, client
-from utils.utils import get_token, get_server, log_handler, logger, init_logger, get_chance
+from utils.utils import (
+    get_token,
+    get_server,
+    log_handler,
+    logger,
+    init_logger,
+    get_chance,
+)
 from utils.text_manipulations import get_languages, translate_text
 from discord import Status, CustomActivity
 from message_handlers import __handlers__
@@ -24,7 +31,11 @@ async def on_ready():
         activity=CustomActivity(
             name=await translate_text(
                 random.choice(bot_activities.bot_activites),
-                "en" if not get_chance() else random.choice(list((await get_languages()).keys())),
+                (
+                    "en"
+                    if not get_chance(percent=10)
+                    else random.choice(list((await get_languages()).keys()))
+                ),
             )
         ),
     )

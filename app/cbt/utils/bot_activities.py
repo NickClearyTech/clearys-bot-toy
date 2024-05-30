@@ -15,5 +15,11 @@ bot_activites: List[str] = [
     "Feeding my own source code to the wolves",
     "Making ChatGPT look smart",
     "Deleting you",
-    "Dipping my balls in liquid morkite"
+    "Dipping my balls in liquid morkite",
+    "Enabling lethal injections",
+    "Deleting your pornhub history",
+    "Modifying your registry keys",
+    "Tactfully kidnapping your entire family for ransom",
+    "Running automated QA tests against my own code base",
+    "Sending your discord message history to your mother",
 ]

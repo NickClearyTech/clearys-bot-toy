@@ -33,6 +33,10 @@ all_memes_config:
     users:
     # Christen
       - 410282526536499200
+  taytay:
+    users:
+      # Christen
+      - 410282526536499200
 github:
   owner: NickClearyTech
   repo: clearys-bot-toy
