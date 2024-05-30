@@ -21,5 +21,5 @@ bot_activites: List[str] = [
     "Modifying your registry keys",
     "Tactfully kidnapping your entire family for ransom",
     "Running automated QA tests against my own code base",
-    "Sending your discord message history to your mother"
+    "Sending your discord message history to your mother",
 ]

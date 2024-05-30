@@ -20,7 +20,7 @@ taylor_memes: List[str] = [
     "Guys did you know Christen browses r/taylorswift? I think he's secretly a swiftie",
     "Classified intelligence indicates that Christen is obsessed with Taylor Swift and is jealous that he can't marry her",
     "State sponsored actors (Christen) have been known to drag Taylor's name through the mud. Fight back! Mud him!",
-    "Imagine hating Tay Tay. Christen can. SMH"
+    "Imagine hating Tay Tay. Christen can. SMH",
 ]
 
 
@@ -51,10 +51,8 @@ async def christen_mentions_chris(message: Message):
 
 
 @handler(
-    name="Christen mentions Tay Tay",
-    users=config_object.all_memes_config.taytay.users
+    name="Christen mentions Tay Tay", users=config_object.all_memes_config.taytay.users
 )
 async def christen_loves_taylor(message: Message):
     if "taylor".casefold() in message.content.casefold() and get_chance(percent=70):
         await message.reply(random.choice(taylor_memes))
-

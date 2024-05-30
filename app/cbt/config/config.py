@@ -31,6 +31,7 @@ class AllMemesConfig(BaseModel):
     chris: MemeConfig
     taytay: MemeConfig
 
+
 class LibreTranslateServerConfig(BaseModel):
     url: str
     default_language: str
