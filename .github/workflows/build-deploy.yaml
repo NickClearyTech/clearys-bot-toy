@@ -107,7 +107,7 @@ jobs:
   deploy:
     runs-on: nicleary-ubuntu-k8s
     container:
-      image: harbor.nicleary.com/dockerhub/dtzar/helm-kubectl:3.13.3
+      image: harbor.nicleary.com/dockerhub/dtzar/helm-kubectl:3.12.0
     env:
       KUBECONFIG_DATA: ${{ secrets.RANCHER_KUBECONFIG }}
     needs:
