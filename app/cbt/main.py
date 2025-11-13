@@ -1,5 +1,6 @@
 import sys
 import random
+import os
 
 import discord
 
@@ -13,18 +14,21 @@ from utils.utils import (
     init_logger,
     get_chance,
 )
+from cbt_minio.validate_bucket import validate_minio_bucket_exists
+from cbt_redis.startups import run_init
 from utils.text_manipulations import get_languages, translate_text
 from discord import Status, CustomActivity
 from message_handlers import __handlers__
 
 # Importing this here ends up creating the config object
-from config import get_config
 
 
 @client.event
 async def on_ready():
 
     logger.info(f"Loaded {len(__handlers__)} handlers")
+
+    validate_minio_bucket_exists()
 
     await client.change_presence(
         status=Status.online,
@@ -39,9 +43,9 @@ async def on_ready():
             )
         ),
     )
-    import commands
 
     await tree.sync(guild=discord.Object(get_server()))
+    run_init()
     logger.info("Ready!")
 
 
