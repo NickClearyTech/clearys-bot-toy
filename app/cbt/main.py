@@ -3,6 +3,7 @@ import random
 
 import discord
 
+from config.get_config import config_object
 from utils import bot_activities
 from utils.client import tree, client
 from utils.utils import (
@@ -39,9 +40,16 @@ async def on_ready():
             )
         ),
     )
+
     import commands
 
     await tree.sync(guild=discord.Object(get_server()))
+
+    channel = client.get_channel(config_object.startup_notification_channel)
+    await channel.send(
+        f"I just started up! Isn't that so cool?? I'm {random.choice(bot_activities.bot_activites).lower()}"
+    )
+
     logger.info("Ready!")
 
 

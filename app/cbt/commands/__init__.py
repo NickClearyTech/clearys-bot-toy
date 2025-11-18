@@ -5,3 +5,4 @@ from . import translate
 from . import segfault
 from . import redeploy
 from . import change_nickname
+from . import create_issue

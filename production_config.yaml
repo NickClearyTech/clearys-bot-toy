@@ -37,6 +37,8 @@ all_memes_config:
     users:
       # Christen
       - 410282526536499200
+# Bot spam channel
+startup_notification_channel: "829559812932763649"
 github:
   owner: NickClearyTech
   repo: clearys-bot-toy
