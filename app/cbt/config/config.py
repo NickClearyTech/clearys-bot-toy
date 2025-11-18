@@ -4,7 +4,7 @@ import os
 from pydantic import BaseModel, HttpUrl
 
 
-class GitHubConfiig(BaseModel):
+class GitHubConfig(BaseModel):
     owner: Optional[str]
     repo: Optional[str]
     workflow_name: Optional[str]
@@ -41,4 +41,5 @@ class Config(BaseModel):
     libretranslate_server_config: LibreTranslateServerConfig
     discord_server_id: int
     all_memes_config: AllMemesConfig
-    github: GitHubConfiig
+    github: GitHubConfig
+    startup_notification_channel: int

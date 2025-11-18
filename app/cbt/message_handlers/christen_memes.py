@@ -25,7 +25,7 @@ taylor_memes: List[str] = [
     "I was watching Christen in the shower the other day and he was literally singing Love Story at the top of his lungs. Some Taylor hater he is.",
     "Christen comes from a long line of Taylor Lovers. He himself is he final form of the family, a Taylor Fan for the ages. Loverboy.",
     "I saw Christen's bank statements. He spent a years salary on backstage passes for an Eras Tour concert",
-    "At the next Con, Christen is planning on cosplaying as a Taylor lover"
+    "At the next Con, Christen is planning on cosplaying as a Taylor lover",
 ]
 
 

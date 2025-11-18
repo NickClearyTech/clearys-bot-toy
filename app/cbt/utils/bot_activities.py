@@ -3,7 +3,7 @@ from typing import List
 bot_activites: List[str] = [
     "Committing multiple felonies",
     "Decompiling my own source code",
-    "Installing itself as the dictator of a small country",
+    "Installing myself as the dictator of a small country",
     "Performing open heart surgery",
     "Poisoning the water supply",
     "Teaching elementary school children the merits of communism",
