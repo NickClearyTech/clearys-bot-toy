@@ -7,6 +7,7 @@ from typing import Callable, List
 from attr.converters import optional
 from discord import Message
 from utils.utils import logger
+from utils.message_utils import message_has_urls
 
 __handlers__ = []
 
@@ -21,6 +22,7 @@ def handler(
     channels: optional(List[str]) = None,
     servers: optional(list[str]) = None,
     users: optional(list[str]) = None,
+    has_urls: optional(bool) = None,
 ) -> Callable:
     def wrapper(func: Callable) -> Callable:
         @functools.wraps(func)
@@ -35,6 +37,8 @@ def handler(
             if users is not None and message.author.id not in users:
                 return None
             if servers is not None and message.guild.id not in servers:
+                return None
+            if has_urls and not message_has_urls(message):
                 return None
             logger.info(f"Running handler: {name}")
             return await func(*args, **kwargs)
